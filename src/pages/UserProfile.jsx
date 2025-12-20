@@ -19,11 +19,11 @@ const UserProfile = () => {
   };
 
   const menuItems = [
-    { icon: 'person', title: 'Edit Profile', desc: 'Manage your personal information', link: '#' },
-    { icon: 'credit_card', title: 'Payment Methods', desc: 'Add or remove cards', link: '#' },
-    { icon: 'star', title: 'Ratings & Reviews', desc: 'Share your experience', link: '#' },
-    { icon: 'pool', title: 'Hotel Amenities', desc: 'View what we offer', link: '#' },
-    { icon: 'info', title: 'About Us', desc: 'Our story and contact info', link: '#' },
+    { icon: 'person', title: 'Edit Profile', desc: 'Manage your personal information', link: '/coming-soon' },
+    { icon: 'credit_card', title: 'Payment Methods', desc: 'Add or remove cards', link: '/coming-soon' },
+    { icon: 'star', title: 'Ratings & Reviews', desc: 'Share your experience', link: '/coming-soon' },
+    { icon: 'pool', title: 'Hotel Amenities', desc: 'View what we offer', link: '/coming-soon' },
+    { icon: 'info', title: 'About Us', desc: 'Our story and contact info', link: '/coming-soon' },
   ];
 
   return (

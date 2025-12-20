@@ -39,7 +39,8 @@ const ManageRooms = () => {
         <div className="flex gap-4 items-center">
             <div className="hidden md:flex items-center gap-6 text-sm font-medium">
                 <Link to="/admin" className="text-gray-500 hover:text-primary">Dashboard</Link>
-                <Link to="/admin/rooms" className="text-primary">Rooms</Link>
+                <Link to="/admin/rooms" className="text-primary font-bold">Room Management</Link>
+                <Link to="/admin/finances" className="text-gray-500 hover:text-primary">Finances</Link>
                 <Link to="/reports" className="text-gray-500 hover:text-primary">Reports</Link>
             </div>
             <button className="flex items-center justify-center rounded-full w-10 h-10 bg-gray-100 dark:bg-gray-700 text-gray-500">

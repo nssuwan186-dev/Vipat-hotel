@@ -14,6 +14,7 @@ import ManageFinances from './pages/ManageFinances';
 import UserProfile from './pages/UserProfile';
 import ManagePromotions from './pages/ManagePromotions';
 import AdminSettings from './pages/AdminSettings';
+import ComingSoon from './pages/ComingSoon';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/my-bookings" element={<MyBookings />} />
           <Route path="/profile" element={<UserProfile />} />
+          <Route path="/coming-soon" element={<ComingSoon />} />
           <Route path="/admin" element={<AdminDashboard />} />
           <Route path="/admin/rooms" element={<ManageRooms />} />
           <Route path="/admin/finances" element={<ManageFinances />} />
