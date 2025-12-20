@@ -3,7 +3,35 @@
 @tailwind utilities;
 
 @layer base {
-  body {
-    @apply bg-background-light dark:bg-background-dark text-slate-900 dark:text-white;
+  :root {
+    --primary: 61 153 245;
   }
+
+  body {
+    @apply bg-[#f8fafc] dark:bg-[#0b1218] text-slate-900 dark:text-white;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    overscroll-behavior-y: none; /* ปิด Pull-to-refresh ของ Browser เพื่อให้เหมือนแอปจริง */
+  }
+
+  input, textarea {
+    user-select: auto;
+  }
+}
+
+@layer components {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* ปรับปรุงความลื่นไหลของการเลื่อน */
+  .scroll-smooth {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* ปรับระยะ Safe Area สำหรับมือถือที่มีขอบโค้งหรือ Home Bar */
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom);
 }
