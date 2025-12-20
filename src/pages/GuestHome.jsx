@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import AIChat from '../components/AIChat';
 import { useHotel } from '../context/HotelContext';
 
 const GuestHome = () => {
@@ -181,6 +182,7 @@ const GuestHome = () => {
         </div>
       </div>
       <Footer />
+      <AIChat />
     </div>
   );
 };
