@@ -44,11 +44,11 @@ const ManageFinances = () => {
 
       <div className="p-6 md:px-12 lg:px-20 max-w-[800px] mx-auto flex flex-col gap-6">
         <div className="flex flex-col gap-1">
-            <h1 className="text-3xl font-black">Record Transaction</h1>
-            <p className="text-gray-500 dark:text-gray-400">Add daily income or expenses manually.</p>
+            <h1 className="text-3xl font-black">บันทึกรายการรายรับ-รายจ่าย</h1>
+            <p className="text-gray-500 dark:text-gray-400">เพิ่มรายการบัญชีประจำวันด้วยตนเอง</p>
         </div>
 
-        <form onSubmit={handleSubmit} className="bg-white dark:bg-[#1a2634] p-6 rounded-xl shadow-sm border border-[#cfdbe7] dark:border-gray-700 flex flex-col gap-6">
+        <form onSubmit={handleSubmit} className="bg-white dark:bg-[#1a2634] p-6 rounded-xl shadow-sm border border-[#cfdbe7] dark:border-border-dark flex flex-col gap-6">
             {/* Transaction Type */}
             <div className="flex gap-4">
                 <label className={`flex-1 cursor-pointer border rounded-xl p-4 flex items-center gap-3 transition-all ${formData.type === 'income' ? 'border-green-500 bg-green-50 dark:bg-green-900/20 text-green-700' : 'border-gray-200 dark:border-gray-700'}`}>
@@ -57,8 +57,8 @@ const ManageFinances = () => {
                         <span className="material-symbols-outlined">arrow_downward</span>
                     </div>
                     <div>
-                        <span className="block font-bold">Income (รายรับ)</span>
-                        <span className="text-xs opacity-70">Room fees, Service, etc.</span>
+                        <span className="block font-bold">รายรับ (Income)</span>
+                        <span className="text-xs opacity-70">ค่าห้อง, ค่าบริการ ฯลฯ</span>
                     </div>
                 </label>
                 <label className={`flex-1 cursor-pointer border rounded-xl p-4 flex items-center gap-3 transition-all ${formData.type === 'expense' ? 'border-red-500 bg-red-50 dark:bg-red-900/20 text-red-700' : 'border-gray-200 dark:border-gray-700'}`}>
@@ -67,35 +67,35 @@ const ManageFinances = () => {
                         <span className="material-symbols-outlined">arrow_upward</span>
                     </div>
                     <div>
-                        <span className="block font-bold">Expense (รายจ่าย)</span>
-                        <span className="text-xs opacity-70">Utilities, Supplies, etc.</span>
+                        <span className="block font-bold">รายจ่าย (Expense)</span>
+                        <span className="text-xs opacity-70">ค่าน้ำไฟ, ของใช้ ฯลฯ</span>
                     </div>
                 </label>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <label className="flex flex-col gap-2">
-                    <span className="text-sm font-medium">Date</span>
+                    <span className="text-sm font-medium">วันที่</span>
                     <input type="date" required className="form-input rounded-lg dark:bg-gray-800 dark:border-gray-600" value={formData.date} onChange={e => setFormData({...formData, date: e.target.value})} />
                 </label>
                 <label className="flex flex-col gap-2">
-                    <span className="text-sm font-medium">Amount (฿)</span>
+                    <span className="text-sm font-medium">จำนวนเงิน (฿)</span>
                     <input type="number" required min="0" className="form-input rounded-lg dark:bg-gray-800 dark:border-gray-600" placeholder="0.00" value={formData.amount} onChange={e => setFormData({...formData, amount: e.target.value})} />
                 </label>
             </div>
 
             <label className="flex flex-col gap-2">
-                <span className="text-sm font-medium">Description</span>
-                <input type="text" required className="form-input rounded-lg dark:bg-gray-800 dark:border-gray-600" placeholder="e.g. Room 101 Payment, Electric Bill" value={formData.desc} onChange={e => setFormData({...formData, desc: e.target.value})} />
+                <span className="text-sm font-medium">รายการ</span>
+                <input type="text" required className="form-input rounded-lg dark:bg-gray-800 dark:border-gray-600" placeholder="เช่น ค่าห้องพัก 101, ซื้อน้ำยาทำความสะอาด" value={formData.desc} onChange={e => setFormData({...formData, desc: e.target.value})} />
             </label>
 
             <label className="flex flex-col gap-2">
-                <span className="text-sm font-medium">Note (Optional)</span>
-                <textarea className="form-textarea rounded-lg dark:bg-gray-800 dark:border-gray-600 h-24 resize-none" placeholder="Additional details..." value={formData.note} onChange={e => setFormData({...formData, note: e.target.value})}></textarea>
+                <span className="text-sm font-medium">หมายเหตุ (ถ้ามี)</span>
+                <textarea className="form-textarea rounded-lg dark:bg-gray-800 dark:border-gray-600 h-24 resize-none" placeholder="รายละเอียดเพิ่มเติม..." value={formData.note} onChange={e => setFormData({...formData, note: e.target.value})}></textarea>
             </label>
 
             <button type="submit" className="w-full py-3 rounded-xl bg-primary text-white font-bold hover:bg-blue-600 shadow-lg shadow-blue-500/30 transition-all mt-2">
-                Save Record
+                บันทึกรายการ
             </button>
         </form>
       </div>

@@ -19,17 +19,17 @@ const Navbar = () => {
       <div className="flex flex-1 justify-end gap-4 lg:gap-8 items-center">
         <nav className="hidden md:flex items-center gap-6">
           <Link to="/" className="text-white text-sm font-medium hover:text-primary transition-colors flex items-center gap-2">
-            <span className="material-symbols-outlined text-[20px]">home</span> หน้าหลัก
+            <span className="material-symbols-outlined text-[20px]">home</span> หน้าแรก
           </Link>
           <Link to="/reports" className="text-text-secondary text-sm font-medium hover:text-primary transition-colors flex items-center gap-2">
-            <span className="material-symbols-outlined text-[20px]">assessment</span> Reports
+            <span className="material-symbols-outlined text-[20px]">assessment</span> รายงาน
           </Link>
           <a href="#rooms" className="text-text-secondary text-sm font-medium hover:text-primary transition-colors flex items-center gap-2">
-            <span className="material-symbols-outlined text-[20px]">king_bed</span> Rooms
+            <span className="material-symbols-outlined text-[20px]">king_bed</span> ห้องพัก
           </a>
           {user && (
             <Link to="/my-bookings" className="text-text-secondary text-sm font-medium hover:text-primary transition-colors flex items-center gap-2">
-              <span className="material-symbols-outlined text-[20px]">history</span> My Bookings
+              <span className="material-symbols-outlined text-[20px]">history</span> การจองของฉัน
             </Link>
           )}
         </nav>
@@ -46,20 +46,20 @@ const Navbar = () => {
                <Link to="/profile" className="w-8 h-8 rounded-full overflow-hidden border border-primary hover:opacity-80 transition-opacity">
                  <img src={user.avatar} alt="User" className="w-full h-full object-cover" />
                </Link>
-               <button onClick={logout} className="text-sm text-text-secondary hover:text-red-400">Logout</button>
+               <button onClick={logout} className="text-sm text-text-secondary hover:text-red-400">ออกจากระบบ</button>
             </div>
           ) : (
             <button 
               onClick={() => navigate('/login')}
               className="flex items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-primary text-white text-sm font-bold shadow-lg shadow-primary/20 hover:bg-primary/90 transition-all"
             >
-              <span className="truncate">Guest Login</span>
+              <span className="truncate">เข้าสู่ระบบ</span>
             </button>
           )}
           
           <Link to="/admin" className="hidden lg:flex items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-surface-dark border border-border-dark text-text-secondary hover:text-white text-sm font-bold transition-all">
             <span className="material-symbols-outlined mr-2 text-[18px]">admin_panel_settings</span>
-            Admin Portal
+            ระบบจัดการ
           </Link>
         </div>
       </div>

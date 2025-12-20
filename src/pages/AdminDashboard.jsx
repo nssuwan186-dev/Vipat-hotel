@@ -30,8 +30,8 @@ const AdminDashboard = () => {
             <span className="material-symbols-outlined text-white/80">bed</span>
           </div>
           <div className="mt-4">
-            <p className="text-xs text-white/70 uppercase font-semibold tracking-wide">Occupied</p>
-            <p className="text-sm font-medium truncate">Guest</p>
+            <p className="text-xs text-white/70 uppercase font-semibold tracking-wide">ไม่ว่าง (Occupied)</p>
+            <p className="text-sm font-medium truncate">มีผู้เข้าพัก</p>
             <p className="text-xs text-white/70 mt-1">{room.type}</p>
           </div>
         </div>
@@ -44,8 +44,8 @@ const AdminDashboard = () => {
             <span className="material-symbols-outlined text-green-500">door_open</span>
           </div>
           <div className="mt-4">
-            <p className="text-xs text-green-500 uppercase font-bold tracking-wide">Available</p>
-            <p className="text-sm font-medium text-slate-400 dark:text-slate-600 italic">No Guest</p>
+            <p className="text-xs text-green-500 uppercase font-bold tracking-wide">ว่าง (Available)</p>
+            <p className="text-sm font-medium text-slate-400 dark:text-slate-600 italic">ไม่มีแขก</p>
             <p className="text-xs text-slate-400 dark:text-slate-600 mt-1">{room.type}</p>
           </div>
         </div>
@@ -58,8 +58,8 @@ const AdminDashboard = () => {
                     <span className="material-symbols-outlined text-orange-500 animate-pulse">cleaning_services</span>
                 </div>
                 <div className="mt-4">
-                    <p className="text-xs text-orange-500 uppercase font-bold tracking-wide">Cleaning</p>
-                    <p className="text-sm font-medium text-slate-500 dark:text-[#90adcb]">Housekeeping</p>
+                    <p className="text-xs text-orange-500 uppercase font-bold tracking-wide">ทำความสะอาด (Cleaning)</p>
+                    <p className="text-sm font-medium text-slate-500 dark:text-[#90adcb]">แม่บ้าน</p>
                     <p className="text-xs text-slate-400 dark:text-slate-600 mt-1">{room.type}</p>
                 </div>
             </div>
@@ -72,9 +72,9 @@ const AdminDashboard = () => {
                     <span className="material-symbols-outlined text-red-400">construction</span>
                 </div>
                 <div className="mt-4">
-                    <p className="text-xs text-red-400 uppercase font-bold tracking-wide">Maintenance</p>
+                    <p className="text-xs text-red-400 uppercase font-bold tracking-wide">ปิดซ่อม (Maintenance)</p>
                     <p className="text-sm font-medium text-slate-500">{room.type}</p>
-                    <p className="text-xs text-slate-400 mt-1">Closed</p>
+                    <p className="text-xs text-slate-400 mt-1">งดให้บริการ</p>
                 </div>
             </div>
         );
@@ -89,8 +89,8 @@ const AdminDashboard = () => {
         <div className="flex items-center gap-3 px-6 py-5 border-b border-slate-200 dark:border-[#223649]">
           <div className="bg-center bg-no-repeat bg-cover rounded-full size-10 shadow-lg" style={{backgroundImage: 'url("https://lh3.googleusercontent.com/aida-public/AB6AXuB0ACRc8RqEjDp3XshG-atYuwNUQh62pJ31xwLtJkv1EDCUIdJm1nC-ezqRs93XP_wtHy2OKlXLX9gqfDRahABVmMlHO8gnTROlOL9o3HLUHATbJUAnKpsVsLXoONedkHpRQEwBLHxG1OEROzTRvxf454vVT_Z2oGHHIPvpqWQRATZyq4-dINVtcSp4iL7bEEbrpnz4VLEHAur92Xwq-yzA1Fple6OnTyz-VIqigaZvsWexp-PKoNPyFFT_Et0Y5JFvVHJpntBqvgay")'}}></div>
           <div className="flex flex-col overflow-hidden">
-            <h1 className="text-slate-900 dark:text-white text-base font-bold leading-tight truncate">Vipatkanjak</h1>
-            <p className="text-slate-500 dark:text-[#90adcb] text-xs font-medium leading-normal">Bueng Kan Hotel</p>
+            <h1 className="text-slate-900 dark:text-white text-base font-bold leading-tight truncate">วิพัฒน์กาลจักร</h1>
+            <p className="text-slate-500 dark:text-[#90adcb] text-xs font-medium leading-normal">โรงแรมบึงกาฬ</p>
           </div>
         </div>
         
@@ -98,54 +98,46 @@ const AdminDashboard = () => {
         <div className="flex-1 overflow-y-auto py-4 px-3 flex flex-col gap-6">
           {/* Section: Front Desk */}
           <div className="flex flex-col gap-1">
-            <p className="px-3 text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-2">Front Desk</p>
+            <p className="px-3 text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-2">หน้าเคาน์เตอร์</p>
             <Link to="/" className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-[#223649] transition-colors group">
               <span className="material-symbols-outlined group-hover:text-primary">dashboard</span>
-              <span className="text-sm font-medium">Home Overview</span>
-            </Link>
-            <Link to="/" className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-[#223649] transition-colors group">
-              <span className="material-symbols-outlined group-hover:text-primary">calendar_month</span>
-              <span className="text-sm font-medium">Book Room</span>
+              <span className="text-sm font-medium">ดูภาพรวมโรงแรม</span>
             </Link>
             <Link to="/my-bookings" className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-[#223649] transition-colors group">
               <span className="material-symbols-outlined group-hover:text-primary">history</span>
-              <span className="text-sm font-medium">Booking History</span>
+              <span className="text-sm font-medium">ประวัติการจอง</span>
             </Link>
             <Link to="/profile" className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-[#223649] transition-colors group">
               <span className="material-symbols-outlined group-hover:text-primary">person</span>
-              <span className="text-sm font-medium">My Profile</span>
+              <span className="text-sm font-medium">โปรไฟล์ของฉัน</span>
             </Link>
           </div>
 
           {/* Section: Administrator */}
           <div className="flex flex-col gap-1">
             <div className="px-3 flex items-center justify-between mb-2">
-              <p className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider">Admin Console</p>
+              <p className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider">ระบบจัดการแอดมิน</p>
               <span className="material-symbols-outlined text-slate-600 text-[16px]">lock</span>
             </div>
             <Link to="/admin" className="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary dark:bg-[#3d99f5]/20 dark:text-[#3d99f5] group">
               <span className="material-symbols-outlined icon-fill">analytics</span>
-              <span className="text-sm font-semibold">Dashboard</span>
+              <span className="text-sm font-semibold">แดชบอร์ด</span>
             </Link>
             <Link to="/admin/rooms" className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-[#223649] transition-colors group">
               <span className="material-symbols-outlined group-hover:text-primary">bed</span>
-              <span className="text-sm font-medium">Manage Rooms</span>
+              <span className="text-sm font-medium">จัดการห้องพัก</span>
             </Link>
             <Link to="/admin/finances" className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-[#223649] transition-colors group">
               <span className="material-symbols-outlined group-hover:text-primary">payments</span>
-              <span className="text-sm font-medium">Finances</span>
+              <span className="text-sm font-medium">บันทึกรายรับ-จ่าย</span>
             </Link>
             <Link to="/reports" className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-[#223649] transition-colors group">
               <span className="material-symbols-outlined group-hover:text-primary">description</span>
-              <span className="text-sm font-medium">Reports</span>
-            </Link>
-            <Link to="/coming-soon" className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-[#223649] transition-colors group">
-              <span className="material-symbols-outlined group-hover:text-primary">notifications_active</span>
-              <span className="text-sm font-medium">Notifications</span>
+              <span className="text-sm font-medium">รายงานสรุป</span>
             </Link>
             <Link to="/admin/settings" className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-[#223649] transition-colors group">
               <span className="material-symbols-outlined group-hover:text-primary">settings</span>
-              <span className="text-sm font-medium">Settings</span>
+              <span className="text-sm font-medium">ตั้งค่าระบบ</span>
             </Link>
           </div>
         </div>
@@ -158,8 +150,8 @@ const AdminDashboard = () => {
               <div className="absolute bottom-0 right-0 size-3 bg-green-500 rounded-full border-2 border-white dark:border-[#16212b]"></div>
             </div>
             <div className="flex flex-col">
-              <p className="text-sm font-bold text-slate-900 dark:text-white">{user?.name || "Admin User"}</p>
-              <p className="text-xs text-slate-500 dark:text-[#90adcb]">Manager</p>
+              <p className="text-sm font-bold text-slate-900 dark:text-white">{user?.name || "แอดมิน"}</p>
+              <p className="text-xs text-slate-500 dark:text-[#90adcb]">ผู้จัดการ</p>
             </div>
             <button onClick={handleLogout} className="ml-auto text-slate-400 hover:text-red-500 dark:hover:text-red-400 transition-colors">
               <span className="material-symbols-outlined text-[20px]">logout</span>
@@ -178,8 +170,8 @@ const AdminDashboard = () => {
               <span className="material-symbols-outlined">menu</span>
             </button>
             <div>
-              <h2 className="text-lg font-bold text-slate-900 dark:text-white leading-tight">Room Status Overview</h2>
-              <p className="text-slate-500 dark:text-[#90adcb] text-sm">Today, {new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</p>
+              <h2 className="text-lg font-bold text-slate-900 dark:text-white leading-tight">สถานะห้องพักวันนี้</h2>
+              <p className="text-slate-500 dark:text-[#90adcb] text-sm">ประจำวันที่ {new Date().toLocaleDateString('th-TH', { month: 'long', day: 'numeric', year: 'numeric' })}</p>
             </div>
           </div>
           <div className="flex items-center gap-4">
@@ -187,7 +179,7 @@ const AdminDashboard = () => {
               <div className="pl-3 text-slate-400 dark:text-[#90adcb]">
                 <span className="material-symbols-outlined text-[20px]">search</span>
               </div>
-              <input className="w-full bg-transparent border-none text-sm text-slate-900 dark:text-white focus:ring-0 placeholder:text-slate-400 dark:placeholder:text-[#90adcb]" placeholder="Search rooms, guests..." type="text"/>
+              <input className="w-full bg-transparent border-none text-sm text-slate-900 dark:text-white focus:ring-0 placeholder:text-slate-400 dark:placeholder:text-[#90adcb]" placeholder="ค้นหาห้อง, รายชื่อแขก..." type="text"/>
             </div>
             <button className="flex items-center justify-center size-10 rounded-lg bg-slate-100 dark:bg-[#223649] text-slate-600 dark:text-white hover:bg-slate-200 dark:hover:bg-[#314d68] transition-colors relative">
               <span className="material-symbols-outlined text-[20px]">notifications</span>
@@ -195,7 +187,7 @@ const AdminDashboard = () => {
             </button>
             <Link to="/admin/rooms" className="hidden sm:flex items-center gap-2 h-10 px-4 rounded-lg bg-primary hover:bg-blue-600 text-white font-medium text-sm transition-colors shadow-lg shadow-primary/25">
               <span className="material-symbols-outlined text-[20px]">add</span>
-              <span>Manage Rooms</span>
+              <span>จัดการห้องพัก</span>
             </Link>
           </div>
         </header>
@@ -208,7 +200,7 @@ const AdminDashboard = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               <div className="flex flex-col gap-2 rounded-xl p-5 bg-white dark:bg-[#16212b] border border-slate-200 dark:border-[#314d68] shadow-sm">
                 <div className="flex justify-between items-start">
-                  <p className="text-slate-500 dark:text-[#90adcb] text-sm font-medium">Available Rooms</p>
+                  <p className="text-slate-500 dark:text-[#90adcb] text-sm font-medium">ห้องว่าง</p>
                   <span className="bg-green-100 dark:bg-green-500/10 text-green-600 dark:text-green-400 rounded-md p-1">
                     <span className="material-symbols-outlined text-[20px]">door_front</span>
                   </span>
@@ -223,7 +215,7 @@ const AdminDashboard = () => {
 
               <div className="flex flex-col gap-2 rounded-xl p-5 bg-white dark:bg-[#16212b] border border-slate-200 dark:border-[#314d68] shadow-sm">
                 <div className="flex justify-between items-start">
-                  <p className="text-slate-500 dark:text-[#90adcb] text-sm font-medium">Occupied Rooms</p>
+                  <p className="text-slate-500 dark:text-[#90adcb] text-sm font-medium">ห้องที่มีแขกพัก</p>
                   <span className="bg-blue-100 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400 rounded-md p-1">
                     <span className="material-symbols-outlined text-[20px]">luggage</span>
                   </span>
@@ -238,7 +230,7 @@ const AdminDashboard = () => {
 
               <div className="flex flex-col gap-2 rounded-xl p-5 bg-white dark:bg-[#16212b] border border-slate-200 dark:border-[#314d68] shadow-sm">
                 <div className="flex justify-between items-start">
-                  <p className="text-slate-500 dark:text-[#90adcb] text-sm font-medium">Daily Revenue</p>
+                  <p className="text-slate-500 dark:text-[#90adcb] text-sm font-medium">รายได้วันนี้</p>
                   <span className="bg-purple-100 dark:bg-purple-500/10 text-purple-600 dark:text-purple-400 rounded-md p-1">
                     <span className="material-symbols-outlined text-[20px]">payments</span>
                   </span>
@@ -253,7 +245,7 @@ const AdminDashboard = () => {
 
               <div className="flex flex-col gap-2 rounded-xl p-5 bg-white dark:bg-[#16212b] border border-slate-200 dark:border-[#314d68] shadow-sm">
                 <div className="flex justify-between items-start">
-                  <p className="text-slate-500 dark:text-[#90adcb] text-sm font-medium">Cleaning Needed</p>
+                  <p className="text-slate-500 dark:text-[#90adcb] text-sm font-medium">รอทำความสะอาด</p>
                   <span className="bg-orange-100 dark:bg-orange-500/10 text-orange-600 dark:text-orange-400 rounded-md p-1">
                     <span className="material-symbols-outlined text-[20px]">cleaning_services</span>
                   </span>
@@ -270,16 +262,16 @@ const AdminDashboard = () => {
             {/* Room Grid Section */}
             <div className="flex flex-col gap-4">
               <div className="flex flex-wrap items-center justify-between gap-4">
-                <h3 className="text-slate-900 dark:text-white text-lg font-bold">Room Grid (All 51 Rooms)</h3>
+                <h3 className="text-slate-900 dark:text-white text-lg font-bold">ผังห้องพัก (ทั้งหมด 51 ห้อง)</h3>
                 <div className="flex gap-2">
                   <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-100 dark:bg-[#223649] text-xs font-medium text-slate-600 dark:text-white">
-                    <span className="size-2 rounded-full bg-green-500"></span> Available
+                    <span className="size-2 rounded-full bg-green-500"></span> ว่าง
                   </span>
                   <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-100 dark:bg-[#223649] text-xs font-medium text-slate-600 dark:text-white">
-                    <span className="size-2 rounded-full bg-primary"></span> Occupied
+                    <span className="size-2 rounded-full bg-primary"></span> ไม่ว่าง
                   </span>
                   <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-100 dark:bg-[#223649] text-xs font-medium text-slate-600 dark:text-white">
-                    <span className="size-2 rounded-full bg-orange-500"></span> Cleaning
+                    <span className="size-2 rounded-full bg-orange-500"></span> ทำความสะอาด
                   </span>
                 </div>
               </div>

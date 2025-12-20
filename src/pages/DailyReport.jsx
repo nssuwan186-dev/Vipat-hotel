@@ -37,7 +37,7 @@ const DailyReport = () => {
                 </button>
               </div>
               <div className="grid grid-cols-7 pt-2">
-                {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map(day => (
+                {['อา', 'จ', 'อ', 'พ', 'พฤ', 'ศ', 'ส'].map(day => (
                   <p key={day} className="text-[#4c739a] text-[12px] font-bold text-center pb-2">{day}</p>
                 ))}
                 <div className="col-start-1 h-9 w-full"></div>
@@ -74,16 +74,16 @@ const DailyReport = () => {
           <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
             <div className="flex flex-col gap-1">
               <h1 className="text-3xl font-black leading-tight tracking-[-0.033em]">รายงานประจำวัน</h1>
-              <p className="text-[#4c739a] text-base font-normal leading-normal dark:text-text-secondary">สรุปยอดเงินและรายละเอียดการทำธุรกรรม วันที่ {selectedDate}</p>
+              <p className="text-[#4c739a] text-base font-normal leading-normal dark:text-text-secondary">สรุปยอดเงินและรายละเอียดการทำธุรกรรม ประจำวันที่ {selectedDate}</p>
             </div>
             <div className="flex gap-2">
               <button className="flex items-center justify-center gap-2 rounded-lg bg-white border border-[#cfdbe7] px-4 py-2.5 text-sm font-bold dark:bg-surface-dark dark:border-border-dark hover:bg-gray-50">
                 <span className="material-symbols-outlined text-[18px]">file_upload</span>
-                <span>Export CSV</span>
+                <span>ส่งออก CSV</span>
               </button>
               <button className="flex items-center justify-center gap-2 rounded-lg bg-primary px-4 py-2.5 text-white text-sm font-bold shadow-sm shadow-blue-200 hover:bg-blue-600">
                 <span className="material-symbols-outlined text-[18px]">picture_as_pdf</span>
-                <span>Export PDF</span>
+                <span>ส่งออก PDF</span>
               </button>
             </div>
           </div>
