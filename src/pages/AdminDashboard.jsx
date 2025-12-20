@@ -31,7 +31,7 @@ const AdminDashboard = () => {
                     <span className="material-symbols-outlined">arrow_back</span>
                 </Link>
                 <div>
-                    <span className="text-primary text-xs font-bold uppercase tracking-widest">Wipatkanjak Hotel</span>
+                    <span className="text-primary text-xs font-bold uppercase tracking-widest">Vipatkanjak Hotel</span>
                     <h2 className="text-2xl font-bold mt-1">Management Dashboard</h2>
                 </div>
             </div>

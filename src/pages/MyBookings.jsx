@@ -6,7 +6,7 @@ const MyBookings = () => {
   const bookings = [
     {
       id: 'BK-88291',
-      hotelName: 'Wipatkanjak Hotel',
+      hotelName: 'Vipatkanjak Hotel',
       roomType: 'Deluxe King Suite',
       image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBJbVHyGYOEkQpEmdY-P1hFxj1ByMuG5mEoVLtg2_OsnROohmACxm7Jk9DPdDW0mbFm4E0X9tXmjSemXkWYhdHVsyaUzaVOMZMUdTHW0VHd-O1fJEKm0G_DeJ-pQwSg21C9ZpB7Tbu-OqJIv2yn0qpZU2dniR1NslI0P_x7vMZIAa8yQ1Ek7Jokgq9qBelSWW3ov_5SCy429sDmXJPwxvvrpUrYiZMVVEAuf2AhdphN5riOtMaRhv1EXbXrbujOdimq389BaMZLxq8I',
       dates: '12 Oct 2024 - 14 Oct 2024 (2 Nights)',
@@ -17,7 +17,7 @@ const MyBookings = () => {
     },
     {
       id: 'BK-88305',
-      hotelName: 'Wipatkanjak Hotel',
+      hotelName: 'Vipatkanjak Hotel',
       roomType: 'Standard Twin Room',
       image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAS_aGJO9cJsPLgFf6FR0fmQaCE2krrdHv15eme2CKdrwLG3XYYP7xHDJ4nOYmW95J0KZTjwviEKg4CH4AV2GWX1r98KY14sCGuWyMely-KlshuENemt3J1nK8z-NEysklr0N9vHM_25GbYSqZyR5Vh7SZvEi3mejUu5q6wr3pCiP86EFYeJShJY4vh9Qmxt-NBtsw15PMiDJldew-gZ5m-XG2E0SrfE3LjShW5wTtdERTcNukFKLHdKp6iliLdnK-VDyw1GZOA88F8',
       dates: '20 Nov 2024 - 22 Nov 2024 (2 Nights)',

@@ -13,7 +13,7 @@ const BookingSuccess = () => {
         </div>
         <h1 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">Booking Confirmed!</h1>
         <p className="text-slate-500 dark:text-text-secondary max-w-md mb-8">
-          Thank you for choosing Wipatkanjak Hotel. Your reservation has been successfully placed. We look forward to welcoming you.
+          Thank you for choosing Vipatkanjak Hotel. Your reservation has been successfully placed. We look forward to welcoming you.
         </p>
         <div className="flex gap-4">
             <Link to="/" className="px-6 py-3 rounded-xl bg-surface-dark border border-border-dark text-white font-bold hover:bg-gray-800 transition-colors">

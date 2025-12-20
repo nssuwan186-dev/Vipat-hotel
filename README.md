@@ -1,4 +1,4 @@
-# Wipatkanjak Hotel Management System
+# Vipatkanjak Hotel Management System
 
 This is a modern Hotel Management Web Application built with React, Vite, and Tailwind CSS.
 It features a Guest Interface for bookings and an Admin Dashboard for managing room status and viewing financials.

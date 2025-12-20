@@ -26,7 +26,7 @@ const AdminSettings = () => {
             <div className="p-6 flex flex-col gap-4">
                 <label className="flex flex-col gap-2">
                     <span className="text-sm font-medium">Hotel Name</span>
-                    <input className="form-input rounded-lg dark:bg-gray-800 dark:border-gray-600" defaultValue="Wipatkanjak Hotel Bueng Kan" />
+                    <input className="form-input rounded-lg dark:bg-gray-800 dark:border-gray-600" defaultValue="Vipatkanjak Hotel Bueng Kan" />
                 </label>
                 <label className="flex flex-col gap-2">
                     <span className="text-sm font-medium">Contact Phone</span>

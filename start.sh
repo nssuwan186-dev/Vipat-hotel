@@ -2,5 +2,5 @@
 echo "Installing dependencies..."
 npm install
 
-echo "Starting Wipatkanjak Hotel App..."
+echo "Starting Vipatkanjak Hotel App..."
 npm run dev
