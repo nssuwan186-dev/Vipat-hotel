@@ -59,13 +59,16 @@ const AdminDashboard = () => {
             <Link to="/admin/finances" className="flex items-center gap-3 px-4 py-3 rounded-lg text-text-secondary hover:text-white hover:bg-white/5 transition-colors">
                 <span className="material-symbols-outlined">payments</span> Manage Finances
             </Link>
+            <Link to="/admin/promotions" className="flex items-center gap-3 px-4 py-3 rounded-lg text-text-secondary hover:text-white hover:bg-white/5 transition-colors">
+                <span className="material-symbols-outlined">campaign</span> Promotions
+            </Link>
             <Link to="/reports" className="flex items-center gap-3 px-4 py-3 rounded-lg text-text-secondary hover:text-white hover:bg-white/5 transition-colors">
                 <span className="material-symbols-outlined">assessment</span> Reports & Stats
             </Link>
             <div className="h-px bg-border-dark my-2"></div>
-            <a href="#" className="flex items-center gap-3 px-4 py-3 rounded-lg text-text-secondary hover:text-white hover:bg-white/5 transition-colors">
+            <Link to="/admin/settings" className="flex items-center gap-3 px-4 py-3 rounded-lg text-text-secondary hover:text-white hover:bg-white/5 transition-colors">
                 <span className="material-symbols-outlined">settings</span> Settings
-            </a>
+            </Link>
         </div>
 
         {/* Main Content */}

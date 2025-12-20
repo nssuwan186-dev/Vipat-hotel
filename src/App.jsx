@@ -11,6 +11,8 @@ import MyBookings from './pages/MyBookings';
 import ManageRooms from './pages/ManageRooms';
 import ManageFinances from './pages/ManageFinances';
 import UserProfile from './pages/UserProfile';
+import ManagePromotions from './pages/ManagePromotions';
+import AdminSettings from './pages/AdminSettings';
 
 function App() {
   return (
@@ -25,6 +27,8 @@ function App() {
           <Route path="/admin" element={<AdminDashboard />} />
           <Route path="/admin/rooms" element={<ManageRooms />} />
           <Route path="/admin/finances" element={<ManageFinances />} />
+          <Route path="/admin/promotions" element={<ManagePromotions />} />
+          <Route path="/admin/settings" element={<AdminSettings />} />
           <Route path="/reports" element={<DailyReport />} />
           <Route path="/book/:roomId" element={<BookingForm />} />
           <Route path="/booking-success" element={<BookingSuccess />} />
