@@ -1,14 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useHotel } from '../context/HotelContext';
 
 const AdminDashboard = () => {
-  const { rooms, stats, user, logout } = useHotel();
+  const { rooms, stats, user, logout, updateRoomStatus } = useHotel();
   const navigate = useNavigate();
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const handleLogout = () => {
     logout();
     navigate('/');
+  };
+
+  const handleRoomClick = (room) => {
+    const statuses = ['Available', 'Occupied', 'Cleaning', 'Maintenance'];
+    const currentIndex = statuses.indexOf(room.status);
+    const nextStatus = statuses[(currentIndex + 1) % statuses.length];
+    updateRoomStatus(room.id, nextStatus);
   };
 
   const getStatusColor = (status) => {
@@ -24,7 +32,7 @@ const AdminDashboard = () => {
   const renderRoomCard = (room) => {
     if (room.status === 'Occupied') {
       return (
-        <div key={room.id} className="group relative flex flex-col justify-between p-4 rounded-xl bg-primary text-white shadow-lg shadow-primary/20 cursor-pointer hover:-translate-y-1 transition-transform">
+        <div key={room.id} onClick={() => handleRoomClick(room)} className="group relative flex flex-col justify-between p-4 rounded-xl bg-primary text-white shadow-lg shadow-primary/20 cursor-pointer hover:-translate-y-1 transition-transform">
           <div className="flex justify-between items-start">
             <span className="text-2xl font-bold">{room.id}</span>
             <span className="material-symbols-outlined text-white/80">bed</span>
@@ -38,7 +46,7 @@ const AdminDashboard = () => {
       );
     } else if (room.status === 'Available') {
       return (
-        <div key={room.id} className="group relative flex flex-col justify-between p-4 rounded-xl bg-white dark:bg-[#16212b] border-2 border-slate-100 dark:border-[#223649] dark:hover:border-green-500 hover:border-green-500 hover:shadow-md cursor-pointer transition-all">
+        <div key={room.id} onClick={() => handleRoomClick(room)} className="group relative flex flex-col justify-between p-4 rounded-xl bg-white dark:bg-[#16212b] border-2 border-slate-100 dark:border-[#223649] dark:hover:border-green-500 hover:border-green-500 hover:shadow-md cursor-pointer transition-all">
           <div className="flex justify-between items-start">
             <span className="text-2xl font-bold text-slate-700 dark:text-slate-300">{room.id}</span>
             <span className="material-symbols-outlined text-green-500">door_open</span>
@@ -52,7 +60,7 @@ const AdminDashboard = () => {
       );
     } else if (room.status === 'Cleaning') {
         return (
-            <div key={room.id} className="group relative flex flex-col justify-between p-4 rounded-xl bg-white dark:bg-[#16212b] border border-orange-200 dark:border-orange-500/30 hover:shadow-md cursor-pointer transition-all">
+            <div key={room.id} onClick={() => handleRoomClick(room)} className="group relative flex flex-col justify-between p-4 rounded-xl bg-white dark:bg-[#16212b] border border-orange-200 dark:border-orange-500/30 hover:shadow-md cursor-pointer transition-all">
                 <div className="flex justify-between items-start">
                     <span className="text-2xl font-bold text-slate-700 dark:text-slate-300">{room.id}</span>
                     <span className="material-symbols-outlined text-orange-500 animate-pulse">cleaning_services</span>
@@ -66,7 +74,7 @@ const AdminDashboard = () => {
         );
     } else {
         return (
-            <div key={room.id} className="group relative flex flex-col justify-between p-4 rounded-xl bg-slate-100 dark:bg-[#1c2a38] border border-slate-200 dark:border-[#223649] opacity-75 cursor-not-allowed">
+            <div key={room.id} onClick={() => handleRoomClick(room)} className="group relative flex flex-col justify-between p-4 rounded-xl bg-slate-100 dark:bg-[#1c2a38] border border-slate-200 dark:border-[#223649] opacity-75 cursor-not-allowed">
                 <div className="flex justify-between items-start">
                     <span className="text-2xl font-bold text-slate-400">{room.id}</span>
                     <span className="material-symbols-outlined text-red-400">construction</span>
@@ -82,16 +90,28 @@ const AdminDashboard = () => {
   };
 
   return (
-    <div className="flex h-screen w-full overflow-hidden bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-white antialiased">
+    <div className="flex h-screen w-full overflow-hidden bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-white antialiased relative">
+      
+      {/* Mobile Overlay */}
+      {isSidebarOpen && (
+        <div 
+            className="fixed inset-0 bg-black/50 z-40 lg:hidden"
+            onClick={() => setIsSidebarOpen(false)}
+        ></div>
+      )}
+
       {/* Sidebar Navigation */}
-      <aside className="flex flex-col w-72 bg-white dark:bg-[#16212b] border-r border-slate-200 dark:border-[#223649] h-full flex-shrink-0 transition-all duration-300">
+      <aside className={`fixed lg:static inset-y-0 left-0 z-50 flex flex-col w-72 bg-white dark:bg-[#16212b] border-r border-slate-200 dark:border-[#223649] h-full flex-shrink-0 transition-transform duration-300 ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}>
         {/* Brand Header */}
         <div className="flex items-center gap-3 px-6 py-5 border-b border-slate-200 dark:border-[#223649]">
           <div className="bg-center bg-no-repeat bg-cover rounded-full size-10 shadow-lg" style={{backgroundImage: 'url("https://lh3.googleusercontent.com/aida-public/AB6AXuB0ACRc8RqEjDp3XshG-atYuwNUQh62pJ31xwLtJkv1EDCUIdJm1nC-ezqRs93XP_wtHy2OKlXLX9gqfDRahABVmMlHO8gnTROlOL9o3HLUHATbJUAnKpsVsLXoONedkHpRQEwBLHxG1OEROzTRvxf454vVT_Z2oGHHIPvpqWQRATZyq4-dINVtcSp4iL7bEEbrpnz4VLEHAur92Xwq-yzA1Fple6OnTyz-VIqigaZvsWexp-PKoNPyFFT_Et0Y5JFvVHJpntBqvgay")'}}></div>
           <div className="flex flex-col overflow-hidden">
-            <h1 className="text-slate-900 dark:text-white text-base font-bold leading-tight truncate">วิพัฒน์กาลจักร</h1>
-            <p className="text-slate-500 dark:text-[#90adcb] text-xs font-medium leading-normal">โรงแรมบึงกาฬ</p>
+            <h1 className="text-slate-900 dark:text-white text-base font-bold leading-tight truncate">Vipatkanjak</h1>
+            <p className="text-slate-500 dark:text-[#90adcb] text-xs font-medium leading-normal">Bueng Kan Hotel</p>
           </div>
+          <button className="lg:hidden ml-auto text-slate-500" onClick={() => setIsSidebarOpen(false)}>
+            <span className="material-symbols-outlined">close</span>
+          </button>
         </div>
         
         {/* Scrollable Menu */}
@@ -102,6 +122,10 @@ const AdminDashboard = () => {
             <Link to="/" className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-[#223649] transition-colors group">
               <span className="material-symbols-outlined group-hover:text-primary">dashboard</span>
               <span className="text-sm font-medium">ดูภาพรวมโรงแรม</span>
+            </Link>
+            <Link to="/" className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-[#223649] transition-colors group">
+              <span className="material-symbols-outlined group-hover:text-primary">calendar_month</span>
+              <span className="text-sm font-medium">จองห้องพัก</span>
             </Link>
             <Link to="/my-bookings" className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-[#223649] transition-colors group">
               <span className="material-symbols-outlined group-hover:text-primary">history</span>
@@ -135,6 +159,10 @@ const AdminDashboard = () => {
               <span className="material-symbols-outlined group-hover:text-primary">description</span>
               <span className="text-sm font-medium">รายงานสรุป</span>
             </Link>
+            <Link to="/coming-soon" className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-[#223649] transition-colors group">
+              <span className="material-symbols-outlined group-hover:text-primary">notifications_active</span>
+              <span className="text-sm font-medium">การแจ้งเตือน</span>
+            </Link>
             <Link to="/admin/settings" className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-[#223649] transition-colors group">
               <span className="material-symbols-outlined group-hover:text-primary">settings</span>
               <span className="text-sm font-medium">ตั้งค่าระบบ</span>
@@ -150,8 +178,8 @@ const AdminDashboard = () => {
               <div className="absolute bottom-0 right-0 size-3 bg-green-500 rounded-full border-2 border-white dark:border-[#16212b]"></div>
             </div>
             <div className="flex flex-col">
-              <p className="text-sm font-bold text-slate-900 dark:text-white">{user?.name || "แอดมิน"}</p>
-              <p className="text-xs text-slate-500 dark:text-[#90adcb]">ผู้จัดการ</p>
+              <p className="text-sm font-bold text-slate-900 dark:text-white">{user?.name || "Admin User"}</p>
+              <p className="text-xs text-slate-500 dark:text-[#90adcb]">Manager</p>
             </div>
             <button onClick={handleLogout} className="ml-auto text-slate-400 hover:text-red-500 dark:hover:text-red-400 transition-colors">
               <span className="material-symbols-outlined text-[20px]">logout</span>
@@ -166,7 +194,10 @@ const AdminDashboard = () => {
         {/* Top Navigation Bar */}
         <header className="flex items-center justify-between px-6 py-4 bg-white dark:bg-[#16212b] border-b border-slate-200 dark:border-[#223649]">
           <div className="flex items-center gap-4">
-            <button className="text-slate-500 dark:text-white hover:text-primary dark:hover:text-primary transition-colors lg:hidden">
+            <button 
+                onClick={() => setIsSidebarOpen(true)}
+                className="text-slate-500 dark:text-white hover:text-primary dark:hover:text-primary transition-colors lg:hidden"
+            >
               <span className="material-symbols-outlined">menu</span>
             </button>
             <div>
