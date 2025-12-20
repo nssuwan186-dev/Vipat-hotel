@@ -13,13 +13,13 @@ const Navbar = () => {
           <span className="material-symbols-outlined">hotel</span>
         </div>
         <Link to="/" className="text-white text-lg font-bold leading-tight tracking-tight hidden sm:block">
-          Wipatkanjak Hotel
+          โรงแรมวิพัฒน์กาลจักร
         </Link>
       </div>
       <div className="flex flex-1 justify-end gap-4 lg:gap-8 items-center">
         <nav className="hidden md:flex items-center gap-6">
           <Link to="/" className="text-white text-sm font-medium hover:text-primary transition-colors flex items-center gap-2">
-            <span className="material-symbols-outlined text-[20px]">home</span> Home
+            <span className="material-symbols-outlined text-[20px]">home</span> หน้าหลัก
           </Link>
           <Link to="/reports" className="text-text-secondary text-sm font-medium hover:text-primary transition-colors flex items-center gap-2">
             <span className="material-symbols-outlined text-[20px]">assessment</span> Reports
