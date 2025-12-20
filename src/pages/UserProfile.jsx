@@ -19,11 +19,10 @@ const UserProfile = () => {
   };
 
   const menuItems = [
-    { icon: 'person', title: 'แก้ไขข้อมูลส่วนตัว', desc: 'จัดการข้อมูลส่วนตัวของคุณ', link: '/coming-soon' },
-    { icon: 'credit_card', title: 'วิธีการชำระเงิน', desc: 'เพิ่มหรือลบบัตรเครดิต/เดบิต', link: '/coming-soon' },
-    { icon: 'star', title: 'การให้คะแนนและรีวิว', desc: 'แบ่งปันประสบการณ์การเข้าพักของคุณ', link: '/coming-soon' },
-    { icon: 'pool', title: 'สิ่งอำนวยความสะดวก', desc: 'ดูบริการทั้งหมดของโรงแรม', link: '/coming-soon' },
-    { icon: 'info', title: 'เกี่ยวกับเรา', desc: 'เรื่องราวและข้อมูลการติดต่อ', link: '/coming-soon' },
+    { icon: 'person', title: 'แก้ไขข้อมูลส่วนตัว', desc: 'จัดการข้อมูลส่วนตัวของคุณ', link: '/profile/edit' },
+    { icon: 'credit_card', title: 'วิธีการชำระเงิน', desc: 'เพิ่มหรือลบบัตรเครดิต/เดบิต', link: '/profile/payment' },
+    { icon: 'star', title: 'การให้คะแนนและรีวิว', desc: 'แบ่งปันประสบการณ์การเข้าพักของคุณ', link: '/profile/reviews' },
+    { icon: 'info', title: 'เกี่ยวกับเรา', desc: 'เรื่องราวและข้อมูลการติดต่อ', link: '/contact' },
   ];
 
   return (

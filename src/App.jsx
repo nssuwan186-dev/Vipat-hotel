@@ -14,6 +14,9 @@ import MyBookings from './pages/MyBookings';
 import UserProfile from './pages/UserProfile';
 import Promotions from './pages/Promotions';
 import Contact from './pages/Contact';
+import EditProfile from './pages/EditProfile';
+import PaymentMethods from './pages/PaymentMethods';
+import HotelReviews from './pages/HotelReviews';
 import Login from './pages/Login';
 import Register from './pages/Register';
 
@@ -44,6 +47,9 @@ function App() {
             <Route path="/my-bookings" element={<ProtectedRoute><MyBookings /></ProtectedRoute>} />
             <Route path="/promotions" element={<Promotions />} />
             <Route path="/profile" element={<ProtectedRoute><UserProfile /></ProtectedRoute>} />
+            <Route path="/profile/edit" element={<ProtectedRoute><EditProfile /></ProtectedRoute>} />
+            <Route path="/profile/payment" element={<ProtectedRoute><PaymentMethods /></ProtectedRoute>} />
+            <Route path="/profile/reviews" element={<HotelReviews />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/book/:roomId" element={<BookingForm />} />
             <Route path="/booking-success" element={<BookingSuccess />} />
