@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 import { HotelProvider } from './context/HotelContext';
 import GuestHome from './pages/GuestHome';
 import AdminDashboard from './pages/AdminDashboard';
@@ -33,6 +34,7 @@ function App() {
           <Route path="/book/:roomId" element={<BookingForm />} />
           <Route path="/booking-success" element={<BookingSuccess />} />
         </Routes>
+        <SpeedInsights />
       </Router>
     </HotelProvider>
   );
