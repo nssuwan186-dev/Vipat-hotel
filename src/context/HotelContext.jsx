@@ -69,6 +69,7 @@ export const HotelProvider = ({ children }) => {
   const [promotions, setPromotions] = useState(() => JSON.parse(localStorage.getItem('vipat_promos_v3')) || [
     { id: 'P1', code: 'WELCOME', name: 'ส่วนลดต้อนรับ', discount: '10%', condition: 'ลูกค้าใหม่' }
   ]);
+  const [theme, setTheme] = useState(() => localStorage.getItem('vipat_theme_v3') || 'dark');
 
   useEffect(() => {
     localStorage.setItem('vipat_rooms_v3', JSON.stringify(rooms));
@@ -78,7 +79,17 @@ export const HotelProvider = ({ children }) => {
     localStorage.setItem('vipat_promos_v3', JSON.stringify(promotions));
   }, [rooms, transactions, user, notifications, promotions]);
 
+  useEffect(() => {
+    const root = window.document.documentElement;
+    root.classList.remove('light', 'dark');
+    root.classList.add(theme);
+    localStorage.setItem('vipat_theme_v3', theme);
+  }, [theme]);
+
   // Actions
+  const toggleTheme = () => {
+    setTheme(prevTheme => prevTheme === 'dark' ? 'light' : 'dark');
+  };
   const login = (u) => setUser(u);
   const logout = () => setUser(null);
   
@@ -108,6 +119,7 @@ export const HotelProvider = ({ children }) => {
   return (
     <HotelContext.Provider value={{ 
         rooms, transactions, user, notifications, promotions,
+        theme, toggleTheme,
         login, logout, addTransaction, updateRoomStatus, bookRoom,
         setRooms, setPromotions, setNotifications
     }}>

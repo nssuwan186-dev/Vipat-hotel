@@ -48,7 +48,7 @@ const GuestHome = () => {
             <div className="flex flex-row items-center gap-1">
                 <div className="flex-1 flex items-center gap-2 bg-slate-50 dark:bg-black/20 px-3 py-2 rounded-xl active:bg-slate-100">
                     <span className="material-symbols-outlined text-primary text-[18px]">calendar_today</span>
-                    <span className="text-[10px] font-black uppercase">เช็คอิน</span>
+                    <span className="text-slate-900 dark:text-white text-[10px] font-black uppercase">เช็คอิน</span>
                 </div>
                 <button onClick={() => navigate('/booking')} className="bg-primary text-white size-10 rounded-xl flex items-center justify-center shadow-lg shadow-primary/20 active:scale-95">
                     <span className="material-symbols-outlined font-black text-[20px]">search</span>
@@ -71,7 +71,7 @@ const GuestHome = () => {
                                 </div>
                             </div>
                             <div className="p-3">
-                                <h3 className="text-xs font-black truncate">{type}</h3>
+                                <h3 className="text-slate-900 dark:text-white text-xs font-black truncate">{type}</h3>
                                 <div className="flex items-baseline gap-0.5 mt-1.5">
                                     <span className="text-[8px] text-primary font-black">฿</span>
                                     <span className="text-sm font-black text-primary">{info.minPrice}</span>

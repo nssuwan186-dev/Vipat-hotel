@@ -19,7 +19,7 @@ const CustomerLayout = () => {
   ];
 
   return (
-    <div className="flex h-screen w-full overflow-hidden bg-[#f1f5f9] dark:bg-[#05090c] font-display text-slate-900 dark:text-white transition-all duration-200">
+    <div className="flex h-screen w-full overflow-hidden bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-white transition-all duration-200">
       
       {/* 1. Sidebar Drawer */}
       <aside className={`fixed inset-y-0 left-0 z-[100] flex flex-col w-[260px] bg-white dark:bg-[#111827] border-r border-slate-200 dark:border-slate-800 shadow-2xl transition-transform duration-300 ease-in-out ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}>
@@ -57,7 +57,7 @@ const CustomerLayout = () => {
         </header>
 
         {/* Content View */}
-        <main className="flex-1 overflow-y-auto pb-[70px] bg-slate-50 dark:bg-[#05090c] relative">
+        <main className="flex-1 overflow-y-auto pb-[70px] bg-slate-50 dark:bg-background-dark relative">
             <Outlet />
             {/* Version Marker for verification */}
             <div className="fixed bottom-[75px] right-2 z-[99] bg-black/50 text-white text-[8px] px-2 py-0.5 rounded-full pointer-events-none">V3.0 UPDATED</div>

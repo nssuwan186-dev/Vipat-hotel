@@ -7,7 +7,7 @@ const ManagePromotions = () => {
 
   return (
     <div className="min-h-screen bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-white">
-      <header className="sticky top-0 z-50 flex items-center justify-between border-b border-[#e7edf3] dark:border-gray-800 bg-white dark:bg-[#1a2634] px-6 py-3 shadow-sm">
+      <header className="sticky top-0 z-50 flex items-center justify-between border-b border-slate-200 dark:border-gray-800 bg-white dark:bg-[#1a2634] px-6 py-3 shadow-sm">
         <div className="flex items-center gap-4">
             <Link to="/admin" className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700">
                 <span className="material-symbols-outlined">arrow_back</span>
@@ -22,7 +22,7 @@ const ManagePromotions = () => {
                 <h1 className="text-3xl font-black">Promotions & Discounts</h1>
                 <p className="text-gray-500 dark:text-gray-400">Current active offers for your guests.</p>
             </div>
-            <button className="flex items-center gap-2 px-5 py-2.5 bg-primary text-white rounded-lg font-bold hover:bg-blue-600 transition-all">
+            <button className="flex items-center gap-2 px-5 py-2.5 bg-primary text-slate-900 dark:text-white rounded-lg font-bold hover:bg-blue-600 transition-all">
                 <span className="material-symbols-outlined">add</span> New Promo
             </button>
         </div>
