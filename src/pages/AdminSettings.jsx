@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useHotel } from '../context/HotelContext';
 
 const AdminSettings = () => {
+  const { theme, toggleTheme } = useHotel();
   return (
     <div className="min-h-screen bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-white">
       <header className="sticky top-0 z-50 flex items-center justify-between border-b border-[#e7edf3] dark:border-gray-800 bg-white dark:bg-[#1a2634] px-6 py-3 shadow-sm">
@@ -37,6 +39,27 @@ const AdminSettings = () => {
                     <textarea className="form-textarea rounded-lg dark:bg-gray-800 dark:border-gray-600 h-24">123 ถนนแม่น้ำโขง อำเภอเมือง จังหวัดบึงกาฬ 38000</textarea>
                 </label>
                 <button className="bg-primary text-white py-2.5 rounded-lg font-bold hover:bg-blue-600 transition-all mt-2">บันทึกการเปลี่ยนแปลง</button>
+            </div>
+        </section>
+
+        <section className="bg-white dark:bg-surface-dark rounded-2xl border border-slate-200 dark:border-border-dark overflow-hidden">
+            <div className="p-6 border-b border-slate-100 dark:border-gray-700">
+                <h3 className="font-bold">การแสดงผล</h3>
+            </div>
+            <div className="p-6 flex items-center justify-between">
+                <div>
+                    <h4 className="font-bold">โหมดมืด</h4>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">เปิดใช้งานธีมสีเข้ม</p>
+                </div>
+                <label className="relative inline-flex items-center cursor-pointer">
+                    <input
+                        type="checkbox"
+                        checked={theme === 'dark'}
+                        onChange={toggleTheme}
+                        className="sr-only peer"
+                    />
+                    <div className="w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-primary"></div>
+                </label>
             </div>
         </section>
 

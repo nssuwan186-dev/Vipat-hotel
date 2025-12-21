@@ -47,7 +47,7 @@ const AIChat = () => {
     <div className="fixed bottom-6 right-6 z-[100] font-display">
       <button 
         onClick={() => setIsOpen(!isOpen)}
-        className="w-14 h-14 rounded-full bg-primary text-white shadow-2xl flex items-center justify-center hover:scale-110 transition-all active:scale-95"
+        className="w-14 h-14 rounded-full bg-primary text-slate-900 dark:text-white shadow-2xl flex items-center justify-center hover:scale-110 transition-all active:scale-95"
       >
         <span className="material-symbols-outlined text-[28px]">
           {isOpen ? 'close' : 'smart_toy'}
@@ -56,7 +56,7 @@ const AIChat = () => {
 
       {isOpen && (
         <div className="absolute bottom-20 right-0 w-[350px] md:w-[400px] h-[500px] bg-white dark:bg-surface-dark rounded-2xl shadow-2xl border border-slate-200 dark:border-border-dark flex flex-col overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-300">
-          <div className="bg-primary p-4 text-white flex items-center gap-3">
+          <div className="bg-primary p-4 text-slate-900 dark:text-white flex items-center gap-3">
             <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
               <span className="material-symbols-outlined">smart_toy</span>
             </div>

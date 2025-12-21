@@ -85,7 +85,7 @@ const MyBookings = () => {
                     </div>
                     <div className="flex gap-3">
                        <button className="text-sm font-medium text-slate-500 dark:text-gray-400 hover:text-red-500 px-3 py-2 transition-colors">ยกเลิก</button>
-                       <button className="flex items-center justify-center rounded-lg bg-primary px-4 py-2 text-sm font-bold text-white shadow-sm hover:bg-blue-600 transition-all">
+                       <button className="flex items-center justify-center rounded-lg bg-primary px-4 py-2 text-sm font-bold text-slate-900 dark:text-white shadow-sm hover:bg-blue-600 transition-all">
                          ดูรายละเอียด
                        </button>
                     </div>

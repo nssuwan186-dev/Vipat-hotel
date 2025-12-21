@@ -19,13 +19,13 @@ const DailyReport = () => {
   const netBalance = totalIncome - totalExpense;
 
   return (
-    <div className="flex min-h-screen flex-col bg-background-light dark:bg-background-dark text-[#0d141b] dark:text-white">
+    <div className="flex min-h-screen flex-col bg-background-light dark:bg-background-dark text-slate-900 dark:text-white">
       <Navbar />
       
       <main className="flex flex-1 flex-col gap-6 p-6 lg:flex-row lg:px-12 xl:px-24">
         {/* Sidebar: Calendar Selection */}
         <aside className="flex w-full flex-col gap-4 lg:w-80 lg:shrink-0">
-          <div className="rounded-xl border border-[#cfdbe7] bg-white p-4 shadow-sm dark:bg-surface-dark dark:border-border-dark">
+          <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm dark:bg-surface-dark dark:border-border-dark">
             <div className="flex flex-col gap-2">
               <div className="flex items-center justify-between p-1 pb-4 border-b border-gray-100 dark:border-border-dark">
                 <button className="flex items-center justify-center rounded-full p-2 hover:bg-gray-100 dark:hover:bg-gray-700">
@@ -38,7 +38,7 @@ const DailyReport = () => {
               </div>
               <div className="grid grid-cols-7 pt-2">
                 {['อา', 'จ', 'อ', 'พ', 'พฤ', 'ศ', 'ส'].map(day => (
-                  <p key={day} className="text-[#4c739a] text-[12px] font-bold text-center pb-2">{day}</p>
+                  <p key={day} className="text-slate-500 dark:text-[#4c739a] text-[12px] font-bold text-center pb-2">{day}</p>
                 ))}
                 <div className="col-start-1 h-9 w-full"></div>
                 <div className="h-9 w-full"></div>
@@ -57,7 +57,7 @@ const DailyReport = () => {
           </div>
 
           <div className="hidden flex-col gap-2 lg:flex">
-            <p className="px-2 text-xs font-bold uppercase tracking-wider text-[#4c739a]">เมนูด่วน</p>
+            <p className="px-2 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-[#4c739a]">เมนูด่วน</p>
             <button className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium hover:bg-gray-100 dark:hover:bg-gray-700">
               <span className="material-symbols-outlined text-[20px] text-primary">calendar_today</span>
               วันนี้ (5 ต.ค.)
@@ -74,14 +74,14 @@ const DailyReport = () => {
           <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
             <div className="flex flex-col gap-1">
               <h1 className="text-3xl font-black leading-tight tracking-[-0.033em]">รายงานประจำวัน</h1>
-              <p className="text-[#4c739a] text-base font-normal leading-normal dark:text-text-secondary">สรุปยอดเงินและรายละเอียดการทำธุรกรรม ประจำวันที่ {selectedDate}</p>
+              <p className="text-slate-500 dark:text-[#4c739a] text-base font-normal leading-normal dark:text-text-secondary">สรุปยอดเงินและรายละเอียดการทำธุรกรรม ประจำวันที่ {selectedDate}</p>
             </div>
             <div className="flex gap-2">
-              <button className="flex items-center justify-center gap-2 rounded-lg bg-white border border-[#cfdbe7] px-4 py-2.5 text-sm font-bold dark:bg-surface-dark dark:border-border-dark hover:bg-gray-50">
+              <button className="flex items-center justify-center gap-2 rounded-lg bg-white border border-slate-200 px-4 py-2.5 text-sm font-bold dark:bg-surface-dark dark:border-border-dark hover:bg-gray-50">
                 <span className="material-symbols-outlined text-[18px]">file_upload</span>
                 <span>ส่งออก CSV</span>
               </button>
-              <button className="flex items-center justify-center gap-2 rounded-lg bg-primary px-4 py-2.5 text-white text-sm font-bold shadow-sm shadow-blue-200 hover:bg-blue-600">
+              <button className="flex items-center justify-center gap-2 rounded-lg bg-primary px-4 py-2.5 text-slate-900 dark:text-white text-sm font-bold shadow-sm shadow-blue-200 hover:bg-blue-600">
                 <span className="material-symbols-outlined text-[18px]">picture_as_pdf</span>
                 <span>ส่งออก PDF</span>
               </button>
@@ -90,23 +90,23 @@ const DailyReport = () => {
 
           {/* Stats Cards */}
           <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-            <div className="flex flex-col gap-2 rounded-xl border border-[#cfdbe7] bg-white p-6 shadow-sm dark:bg-surface-dark dark:border-border-dark">
+            <div className="flex flex-col gap-2 rounded-xl border border-slate-200 bg-white p-6 shadow-sm dark:bg-surface-dark dark:border-border-dark">
               <div className="flex items-center gap-3">
                 <div className="flex size-10 items-center justify-center rounded-full bg-green-50 text-[#078838]">
                   <span className="material-symbols-outlined">payments</span>
                 </div>
-                <p className="text-[#4c739a] text-sm font-bold uppercase tracking-wider">รายรับรวม</p>
+                <p className="text-slate-500 dark:text-[#4c739a] text-sm font-bold uppercase tracking-wider">รายรับรวม</p>
               </div>
               <div className="mt-2">
                 <p className="text-3xl font-black">฿{totalIncome.toLocaleString()}</p>
               </div>
             </div>
-            <div className="flex flex-col gap-2 rounded-xl border border-[#cfdbe7] bg-white p-6 shadow-sm dark:bg-surface-dark dark:border-border-dark">
+            <div className="flex flex-col gap-2 rounded-xl border border-slate-200 bg-white p-6 shadow-sm dark:bg-surface-dark dark:border-border-dark">
               <div className="flex items-center gap-3">
                 <div className="flex size-10 items-center justify-center rounded-full bg-red-50 text-[#e73908]">
                   <span className="material-symbols-outlined">shopping_cart</span>
                 </div>
-                <p className="text-[#4c739a] text-sm font-bold uppercase tracking-wider">รายจ่ายรวม</p>
+                <p className="text-slate-500 dark:text-[#4c739a] text-sm font-bold uppercase tracking-wider">รายจ่ายรวม</p>
               </div>
               <div className="mt-2">
                 <p className="text-3xl font-black">฿{totalExpense.toLocaleString()}</p>
@@ -126,8 +126,8 @@ const DailyReport = () => {
           </div>
 
           {/* Transaction Table */}
-          <div className="flex flex-col rounded-xl border border-[#cfdbe7] bg-white shadow-sm overflow-hidden dark:bg-surface-dark dark:border-border-dark">
-            <div className="flex items-center justify-between border-b border-[#cfdbe7] px-6 py-4 dark:border-border-dark">
+          <div className="flex flex-col rounded-xl border border-slate-200 bg-white shadow-sm overflow-hidden dark:bg-surface-dark dark:border-border-dark">
+            <div className="flex items-center justify-between border-b border-slate-200 px-6 py-4 dark:border-border-dark">
               <h3 className="text-lg font-bold">รายการธุรกรรม (Transactions)</h3>
               <div className="relative">
                 <input className="h-9 rounded-lg border border-gray-300 bg-white px-3 pl-9 text-sm focus:border-primary focus:ring-1 focus:ring-primary dark:bg-gray-800 dark:border-gray-600" placeholder="ค้นหา..." type="text"/>
