@@ -10,27 +10,35 @@ const Login = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    
+
     // Admin Credentials check
     if (email === 'admin' && password === '1234') {
-      login({ 
-        name: 'Administrator', 
-        email: 'admin', 
+      login({
+        name: 'Administrator',
+        email: 'admin',
         role: 'admin',
-        avatar: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAI9_wyN139sGORajtC4muHeqiXvpCn9KFMbgbASXBffVZnmathLhHCt7X818D9KN1bzVKoto-w3eSVjH5WjdIP3sQuhrGD0VwjvxBv_zZNziWXecwwQpLBwJdUxSzcjnGSAzZm8mmzi-8gqnt8VRs5y0utjelif3CFja6Z7iH9ecHcIrA9mV_WSs6yxPg4nCvZ_EhA27TySQA2nKm3nFtQCnMffmzX8SMn7SOwuPZh6N3N9eIB_jG3jIKN8lFq9UBxIbrjunJf5-mo' 
+        avatar: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAI9_wyN139sGORajtC4muHeqiXvpCn9KFMbgbASXBffVZnmathLhHCt7X818D9KN1bzVKoto-w3eSVjH5WjdIP3sQuhrGD0VwjvxBv_zZNziWXecwwQpLBwJdUxSzcjnGSAzZm8mmzi-8gqnt8VRs5y0utjelif3CFja6Z7iH9ecHcIrA9mV_WSs6yxPg4nCvZ_EhA27TySQA2nKm3nFtQCnMffmzX8SMn7SOwuPZh6N3N9eIB_jG3jIKN8lFq9UBxIbrjunJf5-mo'
       });
       navigate('/admin'); // พาไปหน้า Admin ทันทีถ้าเป็น admin
+    } else if (email === 'monitor' && password === '1234') {
+      login({
+        name: 'System Monitor',
+        email: 'monitor',
+        role: 'monitor',
+        avatar: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAI9_wyN139sGORajtC4muHeqiXvpCn9KFMbgbASXBffVZnmathLhHCt7X818D9KN1bzVKoto-w3eSVjH5WjdIP3sQuhrGD0VwjvxBv_zZNziWXecwwQpLBwJdUxSzcjnGSAzZm8mmzi-8gqnt8VRs5y0utjelif3CFja6Z7iH9ecHcIrA9mV_WSs6yxPg4nCvZ_EhA27TySQA2nKm3nFtQCnMffmzX8SMn7SOwuPZh6N3N9eIB_jG3jIKN8lFq9UBxIbrjunJf5-mo'
+      });
+      navigate('/admin');
     } else if (email && password) {
       // Guest login for any other input
-      login({ 
-        name: 'Guest User', 
-        email: email, 
+      login({
+        name: 'Guest User',
+        email: email,
         role: 'guest',
-        avatar: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCxbiipzYCeoT4E7jYoun--DG4O2X73OxYverGywcMT4wKf5DCJXZZdY3nLhyZQZxtW90zZa-ErPfnGB3WTiyjyZY92_AYwkr6ty9Cu9EfoyysTrCXQrb62Az5e_b7McSRgtRMRaOMPcpAhtn3I0onj00cnXy3-_KjND6hsf5YbyF09pX02KIGXdUVedG6hs_zcCTThaZqk2unlvg7tfiVrZbxrXkqGgFsRrxqxMLNAx5WsdQmUbFQ2aohZJtQWUo1fqK3BPBrCwtnK' 
+        avatar: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCxbiipzYCeoT4E7jYoun--DG4O2X73OxYverGywcMT4wKf5DCJXZZdY3nLhyZQZxtW90zZa-ErPfnGB3WTiyjyZY92_AYwkr6ty9Cu9EfoyysTrCXQrb62Az5e_b7McSRgtRMRaOMPcpAhtn3I0onj00cnXy3-_KjND6hsf5YbyF09pX02KIGXdUVedG6hs_zcCTThaZqk2unlvg7tfiVrZbxrXkqGgFsRrxqxMLNAx5WsdQmUbFQ2aohZJtQWUo1fqK3BPBrCwtnK'
       });
       navigate('/');
     } else {
-        alert('กรุณากรอกข้อมูลให้ครบถ้วน');
+      alert('กรุณากรอกข้อมูลให้ครบถ้วน');
     }
   };
 
@@ -38,7 +46,7 @@ const Login = () => {
     <div className="flex min-h-screen w-full flex-col bg-slate-50 dark:bg-background-dark font-display items-center justify-center py-10">
       <div className="flex flex-col w-full max-w-[512px] p-6 bg-white dark:bg-surface-dark rounded-2xl shadow-sm border border-[#cfdbe7] dark:border-border-dark">
         <h2 className="text-[#0d141b] dark:text-white tracking-light text-[28px] font-bold leading-tight text-center pb-6">เข้าสู่ระบบ</h2>
-        
+
         <form onSubmit={handleLogin} className="flex flex-col gap-4">
           <label className="flex flex-col">
             <p className="text-[#0d141b] dark:text-gray-300 text-base font-medium leading-normal pb-2">อีเมล หรือ เบอร์โทรศัพท์</p>
@@ -51,7 +59,7 @@ const Login = () => {
               onChange={(e) => setEmail(e.target.value)}
             />
           </label>
-          
+
           <label className="flex flex-col">
             <p className="text-[#0d141b] dark:text-gray-300 text-base font-medium leading-normal pb-2">รหัสผ่าน</p>
             <input

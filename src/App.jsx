@@ -28,10 +28,16 @@ import DailyReport from './pages/DailyReport';
 import AdminSettings from './pages/AdminSettings';
 import AdminNotifications from './pages/AdminNotifications';
 
-const ProtectedRoute = ({ children, role }) => {
+const ProtectedRoute = ({ children, role, allowedRoles }) => {
   const { user } = useHotel();
   if (!user) return <Navigate to="/login" />;
-  if (role && user.role !== role) return <Navigate to="/" />;
+
+  // Create list of allowed roles. If both props are missing, allow all authenticated users.
+  const authorizedRoles = allowedRoles || (role ? [role] : []);
+
+  if (authorizedRoles.length > 0 && !authorizedRoles.includes(user.role)) {
+    return <Navigate to="/" />;
+  }
   return children;
 };
 
@@ -60,13 +66,13 @@ function App() {
           <Route path="/register" element={<Register />} />
 
           {/* Admin Application */}
-          <Route path="/admin" element={<ProtectedRoute role="admin"><AdminLayout /></ProtectedRoute>}>
+          <Route path="/admin" element={<ProtectedRoute allowedRoles={['admin', 'monitor']}><AdminLayout /></ProtectedRoute>}>
             <Route index element={<AdminDashboard />} />
             <Route path="rooms" element={<ManageRooms />} />
-            <Route path="finances" element={<ManageFinances />} />
+            <Route path="finances" element={<ProtectedRoute role="admin"><ManageFinances /></ProtectedRoute>} />
             <Route path="reports" element={<DailyReport />} />
             <Route path="promotions" element={<Promotions />} />
-            <Route path="settings" element={<AdminSettings />} />
+            <Route path="settings" element={<ProtectedRoute role="admin"><AdminSettings /></ProtectedRoute>} />
             <Route path="notifications" element={<AdminNotifications />} />
           </Route>
         </Routes>

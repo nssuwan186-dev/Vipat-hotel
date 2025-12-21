@@ -8,15 +8,17 @@ const AdminLayout = () => {
   const location = useLocation();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-  const menuItems = [
-    { label: 'แดชบอร์ด', icon: 'analytics', path: '/admin' },
-    { label: 'จัดการห้องพัก', icon: 'bed', path: '/admin/rooms' },
-    { label: 'จัดการการเงิน', icon: 'payments', path: '/admin/finances' },
-    { label: 'รายงานรายวัน', icon: 'description', path: '/admin/reports' },
-    { label: 'โปรโมชั่น', icon: 'campaign', path: '/admin/promotions' },
-    { label: 'การแจ้งเตือน', icon: 'notifications_active', path: '/admin/notifications' },
-    { label: 'ตั้งค่าระบบ', icon: 'settings', path: '/admin/settings' },
+  const allMenuItems = [
+    { label: 'แดชบอร์ด', icon: 'analytics', path: '/admin', allowedRoles: ['admin', 'monitor'] },
+    { label: 'จัดการห้องพัก', icon: 'bed', path: '/admin/rooms', allowedRoles: ['admin', 'monitor'] },
+    { label: 'จัดการการเงิน', icon: 'payments', path: '/admin/finances', allowedRoles: ['admin'] },
+    { label: 'รายงานรายวัน', icon: 'description', path: '/admin/reports', allowedRoles: ['admin', 'monitor'] },
+    { label: 'โปรโมชั่น', icon: 'campaign', path: '/admin/promotions', allowedRoles: ['admin', 'monitor'] },
+    { label: 'การแจ้งเตือน', icon: 'notifications_active', path: '/admin/notifications', allowedRoles: ['admin', 'monitor'] },
+    { label: 'ตั้งค่าระบบ', icon: 'settings', path: '/admin/settings', allowedRoles: ['admin'] },
   ];
+
+  const menuItems = allMenuItems.filter(item => item.allowedRoles.includes(user?.role));
 
   return (
     <div className="flex h-screen w-full overflow-hidden bg-background-dark font-display text-white">
@@ -31,12 +33,12 @@ const AdminLayout = () => {
             <span className="material-symbols-outlined">close</span>
           </button>
         </div>
-        
+
         <nav className="flex-1 p-4 flex flex-col gap-2 overflow-y-auto">
           {menuItems.map(item => (
-            <Link 
-              key={item.path} 
-              to={item.path} 
+            <Link
+              key={item.path}
+              to={item.path}
               onClick={() => setIsSidebarOpen(false)}
               className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${location.pathname === item.path ? 'bg-primary text-white shadow-lg shadow-primary/20' : 'text-slate-400 hover:bg-white/5'}`}
             >
