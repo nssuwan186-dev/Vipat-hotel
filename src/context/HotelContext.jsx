@@ -68,7 +68,6 @@ export const HotelProvider = ({ children }) => {
   const [promotions, setPromotions] = useState(() => JSON.parse(localStorage.getItem('vipat_promos_v3')) || [
     { id: 'P1', code: 'WELCOME', name: 'ส่วนลดต้อนรับ', discount: '10%', condition: 'ลูกค้าใหม่' }
   ]);
-  const [user, setUser] = useState(() => JSON.parse(localStorage.getItem('vipat_user_session_v3')) || null);
   const [logs, setLogs] = useState(() => JSON.parse(localStorage.getItem('vipat_logs_v3')) || []);
   const [theme, setTheme] = useState(() => localStorage.getItem('vipat_theme_v3') || 'dark');
 
@@ -77,9 +76,8 @@ export const HotelProvider = ({ children }) => {
     localStorage.setItem('vipat_trx_v3', JSON.stringify(transactions));
     localStorage.setItem('vipat_notifs_v3', JSON.stringify(notifications));
     localStorage.setItem('vipat_promos_v3', JSON.stringify(promotions));
-    localStorage.setItem('vipat_user_session_v3', JSON.stringify(user));
     localStorage.setItem('vipat_logs_v3', JSON.stringify(logs));
-  }, [rooms, transactions, notifications, promotions, user, logs]);
+  }, [rooms, transactions, notifications, promotions, logs]);
 
   useEffect(() => {
     const root = window.document.documentElement;
@@ -97,23 +95,15 @@ export const HotelProvider = ({ children }) => {
     const newLog = {
         id: `LOG-${Date.now()}`,
         timestamp: new Date().toISOString(),
-        actor: user ? user.name : 'System',
-        role: user ? user.role : 'System',
+        actor: 'Owner',
+        role: 'Admin',
         action,
         details
     };
     setLogs(prev => [newLog, ...prev]);
   };
-
-  const login = (userData) => {
-    setUser(userData);
-    addLog('LOGIN', `User ${userData.name} logged in`);
-  };
-
-  const logout = () => {
-    addLog('LOGOUT', `User ${user?.name} logged out`);
-    setUser(null);
-  };
+  
+  const addTransaction = (trx) => {
   
   const addTransaction = (trx) => {
     setTransactions(prev => [trx, ...prev]);
@@ -201,9 +191,9 @@ export const HotelProvider = ({ children }) => {
 
   return (
     <HotelContext.Provider value={{ 
-        rooms, transactions, notifications, promotions, user, logs,
+        rooms, transactions, notifications, promotions, logs,
         theme, toggleTheme,
-        login, logout, addLog,
+        addLog,
         addTransaction, updateRoomStatus, bookRoom,
         setRooms, setPromotions, setNotifications,
         deleteRoom, addRoom,

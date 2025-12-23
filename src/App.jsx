@@ -15,9 +15,7 @@ import AdminNotifications from './pages/AdminNotifications';
 import ManagePromotions from './pages/ManagePromotions';
 import CalendarView from './pages/CalendarView';
 import Invoice from './pages/Invoice';
-import Login from './pages/Login';
 import ActivityLogs from './pages/ActivityLogs';
-import GuestHistory from './pages/GuestHistory';
 import BookingForm from './pages/BookingForm';
 
 function App() {
@@ -25,9 +23,6 @@ function App() {
     <HotelProvider>
       <Router>
         <Routes>
-          {/* Auth */}
-          <Route path="/login" element={<Login />} />
-
           {/* Main Application Layout */}
           <Route path="/" element={<AdminLayout />}>
             <Route index element={<AdminDashboard />} />

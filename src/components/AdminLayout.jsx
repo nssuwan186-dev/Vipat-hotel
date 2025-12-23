@@ -1,14 +1,9 @@
 import React, { useState } from 'react';
-import { Link, Outlet, useLocation, Navigate, useNavigate } from 'react-router-dom';
-import { useHotel } from '../context/HotelContext';
+import { Link, Outlet, useLocation } from 'react-router-dom';
 
 const AdminLayout = () => {
-  const { user, logout } = useHotel();
-  const navigate = useNavigate();
   const location = useLocation();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-
-  if (!user) return <Navigate to="/login" />;
 
   const menuItems = [
     { label: 'แดชบอร์ด', icon: 'analytics', path: '/' },
@@ -50,17 +45,6 @@ const AdminLayout = () => {
             </Link>
           ))}
         </nav>
-
-        <div className="p-4 border-t border-slate-200 dark:border-[#223649] flex items-center gap-3">
-          <div className="size-10 rounded-full bg-primary/20 flex items-center justify-center text-primary font-black text-lg">
-            {user.name.charAt(0).toUpperCase()}
-          </div>
-          <div className="flex-1 min-w-0">
-            <p className="text-sm font-bold truncate text-slate-900 dark:text-white">{user.name}</p>
-            <p className="text-[10px] text-slate-500 dark:text-[#90adcb]">{user.role}</p>
-          </div>
-          <button onClick={() => { logout(); navigate('/login'); }} className="text-slate-500 dark:text-slate-400 hover:text-red-400"><span className="material-symbols-outlined">logout</span></button>
-        </div>
       </aside>
 
       {/* Content */}
