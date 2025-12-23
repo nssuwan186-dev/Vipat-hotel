@@ -25,7 +25,7 @@ const AdminLayout = () => {
         <div className="p-6 border-b border-slate-200 dark:border-[#223649] flex justify-between items-center">
           <div>
             <h1 className="text-xl font-bold text-slate-900 dark:text-white">Vipat Hotel</h1>
-            <p className="text-xs text-slate-500 dark:text-[#90adcb]">Management System</p>
+            <p className="text-xs text-slate-500 dark:text-[#90adcb]">Management System <span className="text-primary font-bold ml-1">v2.0 (Final)</span></p>
           </div>
           <button className="lg:hidden text-slate-900 dark:text-white" onClick={() => setIsSidebarOpen(false)}>
             <span className="material-symbols-outlined">close</span>
