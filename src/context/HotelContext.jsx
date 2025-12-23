@@ -61,7 +61,6 @@ export const HotelProvider = ({ children }) => {
   // Persistent States
   const [rooms, setRooms] = useState(() => JSON.parse(localStorage.getItem('vipat_rooms_v3')) || DEFAULT_ROOMS);
   const [transactions, setTransactions] = useState(() => JSON.parse(localStorage.getItem('vipat_trx_v3')) || []);
-  const [user, setUser] = useState(() => JSON.parse(localStorage.getItem('vipat_user_v3')) || null);
   const [notifications, setNotifications] = useState(() => JSON.parse(localStorage.getItem('vipat_notifs_v3')) || [
     { id: 1, title: 'จองใหม่', message: 'มีการจองใหม่ห้อง A101', time: '10 นาทีที่แล้ว', read: false },
     { id: 2, title: 'การชำระเงิน', message: 'คุณสมชายชำระเงินเรียบร้อย', time: '1 ชม. ที่แล้ว', read: true }
@@ -69,15 +68,18 @@ export const HotelProvider = ({ children }) => {
   const [promotions, setPromotions] = useState(() => JSON.parse(localStorage.getItem('vipat_promos_v3')) || [
     { id: 'P1', code: 'WELCOME', name: 'ส่วนลดต้อนรับ', discount: '10%', condition: 'ลูกค้าใหม่' }
   ]);
+  const [user, setUser] = useState(() => JSON.parse(localStorage.getItem('vipat_user_session_v3')) || null);
+  const [logs, setLogs] = useState(() => JSON.parse(localStorage.getItem('vipat_logs_v3')) || []);
   const [theme, setTheme] = useState(() => localStorage.getItem('vipat_theme_v3') || 'dark');
 
   useEffect(() => {
     localStorage.setItem('vipat_rooms_v3', JSON.stringify(rooms));
     localStorage.setItem('vipat_trx_v3', JSON.stringify(transactions));
-    localStorage.setItem('vipat_user_v3', JSON.stringify(user));
     localStorage.setItem('vipat_notifs_v3', JSON.stringify(notifications));
     localStorage.setItem('vipat_promos_v3', JSON.stringify(promotions));
-  }, [rooms, transactions, user, notifications, promotions]);
+    localStorage.setItem('vipat_user_session_v3', JSON.stringify(user));
+    localStorage.setItem('vipat_logs_v3', JSON.stringify(logs));
+  }, [rooms, transactions, notifications, promotions, user, logs]);
 
   useEffect(() => {
     const root = window.document.documentElement;
@@ -90,38 +92,122 @@ export const HotelProvider = ({ children }) => {
   const toggleTheme = () => {
     setTheme(prevTheme => prevTheme === 'dark' ? 'light' : 'dark');
   };
-  const login = (u) => setUser(u);
-  const logout = () => setUser(null);
+
+  const addLog = (action, details) => {
+    const newLog = {
+        id: `LOG-${Date.now()}`,
+        timestamp: new Date().toISOString(),
+        actor: user ? user.name : 'System',
+        role: user ? user.role : 'System',
+        action,
+        details
+    };
+    setLogs(prev => [newLog, ...prev]);
+  };
+
+  const login = (userData) => {
+    setUser(userData);
+    addLog('LOGIN', `User ${userData.name} logged in`);
+  };
+
+  const logout = () => {
+    addLog('LOGOUT', `User ${user?.name} logged out`);
+    setUser(null);
+  };
   
-  const addTransaction = (trx) => setTransactions(prev => [trx, ...prev]);
-  const updateRoomStatus = (id, status) => setRooms(prev => prev.map(r => r.id === id ? { ...r, status } : r));
+  const addTransaction = (trx) => {
+    setTransactions(prev => [trx, ...prev]);
+    addLog('ADD_TRANSACTION', `Created transaction ${trx.id} (${trx.desc})`);
+  };
+
+  const updateRoomStatus = (id, status) => {
+    setRooms(prev => prev.map(r => r.id === id ? { ...r, status } : r));
+    addLog('UPDATE_ROOM', `Changed room ${id} status to ${status}`);
+  };
   
   const bookRoom = (id, guestInfo) => {
     updateRoomStatus(id, 'Occupied');
-    const room = rooms.find(r => r.id === id);
+    const roomRate = guestInfo.totalPrice || 0;
+    
+    // Initial Charge (Room Rent)
+    const initialCharges = [{
+        id: `CHG-${Date.now()}`,
+        desc: `ค่าห้องพัก (${guestInfo.nights} คืน)`,
+        amount: roomRate,
+        date: new Date().toLocaleDateString('th-TH')
+    }];
+
     addTransaction({
         id: `TRX-${Date.now()}`,
-        desc: `จองห้อง ${id} (${guestInfo.firstName})`,
-        amount: room.price,
+        desc: `จองห้อง ${id} (${guestInfo.firstName} ${guestInfo.lastName})`,
+        amount: roomRate, // Total amount
+        charges: initialCharges, // Itemized charges
         type: 'income',
         date: new Date().toLocaleDateString('th-TH'),
-        status: 'Completed'
+        status: 'Unpaid', // Default to Unpaid until settled
+        roomNo: id,
+        checkIn: guestInfo.checkIn,
+        checkOut: guestInfo.checkOut,
+        customerName: `${guestInfo.firstName} ${guestInfo.lastName}`,
+        customerPhone: guestInfo.phone,
+        customerAddress: guestInfo.address || '-'
     });
+    
     setNotifications(prev => [{
         id: Date.now(),
         title: 'การจองใหม่',
-        message: `คุณ ${guestInfo.firstName} จองห้อง ${id} สำเร็จ`,
+        message: `คุณ ${guestInfo.firstName} จองห้อง ${id}`,
         time: 'เมื่อสักครู่',
         read: false
     }, ...prev]);
+
+    addLog('BOOK_ROOM', `Booked room ${id} for customer ${guestInfo.firstName} ${guestInfo.lastName}`);
+  };
+
+  const addChargeToBooking = (trxId, chargeItem) => {
+    setTransactions(prev => prev.map(t => {
+        if (t.id === trxId) {
+            const newCharges = [...(t.charges || []), { ...chargeItem, id: `CHG-${Date.now()}` }];
+            const newTotal = newCharges.reduce((sum, c) => sum + c.amount, 0);
+            return { ...t, charges: newCharges, amount: newTotal };
+        }
+        return t;
+    }));
+    addLog('ADD_CHARGE', `Added charge "${chargeItem.desc}" to transaction ${trxId}`);
+  };
+
+  const deleteRoom = (id) => {
+    setRooms(prev => prev.filter(r => r.id !== id));
+    addLog('DELETE_ROOM', `Deleted room ${id}`);
+  };
+
+  const addRoom = (room) => {
+    setRooms(prev => [...prev, room]);
+    addLog('ADD_ROOM', `Added new room ${room.id} (${room.type})`);
+  };
+
+  const updateBooking = (trxId, newData) => {
+    setTransactions(prev => prev.map(t => 
+        t.id === trxId ? { ...t, ...newData } : t
+    ));
+    addLog('UPDATE_BOOKING', `Updated booking info for transaction ${trxId}`);
+  };
+
+  const cancelBooking = (trxId, roomId) => {
+    setTransactions(prev => prev.filter(t => t.id !== trxId));
+    if (roomId) updateRoomStatus(roomId, 'Available');
+    addLog('CANCEL_BOOKING', `Cancelled booking ${trxId} and freed room ${roomId}`);
   };
 
   return (
     <HotelContext.Provider value={{ 
-        rooms, transactions, user, notifications, promotions,
+        rooms, transactions, notifications, promotions, user, logs,
         theme, toggleTheme,
-        login, logout, addTransaction, updateRoomStatus, bookRoom,
-        setRooms, setPromotions, setNotifications
+        login, logout, addLog,
+        addTransaction, updateRoomStatus, bookRoom,
+        setRooms, setPromotions, setNotifications,
+        deleteRoom, addRoom,
+        updateBooking, cancelBooking, addChargeToBooking
     }}>
       {children}
     </HotelContext.Provider>

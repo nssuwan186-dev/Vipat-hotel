@@ -1,74 +1,56 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { HotelProvider, useHotel } from './context/HotelContext';
+import { HotelProvider } from './context/HotelContext';
 
 // Layouts
-import CustomerLayout from './components/CustomerLayout';
 import AdminLayout from './components/AdminLayout';
 
-// Guest Pages
-import GuestHome from './pages/GuestHome';
-import BookingForm from './pages/BookingForm';
-import BookingSuccess from './pages/BookingSuccess';
-import MyBookings from './pages/MyBookings';
-import UserProfile from './pages/UserProfile';
-import Promotions from './pages/Promotions';
-import Contact from './pages/Contact';
-import EditProfile from './pages/EditProfile';
-import PaymentMethods from './pages/PaymentMethods';
-import HotelReviews from './pages/HotelReviews';
-import Login from './pages/Login';
-import Register from './pages/Register';
-
-// Admin Pages
+// Pages
 import AdminDashboard from './pages/AdminDashboard';
 import ManageRooms from './pages/ManageRooms';
 import ManageFinances from './pages/ManageFinances';
 import DailyReport from './pages/DailyReport';
 import AdminSettings from './pages/AdminSettings';
 import AdminNotifications from './pages/AdminNotifications';
-
-const ProtectedRoute = ({ children, role }) => {
-  const { user } = useHotel();
-  if (!user) return <Navigate to="/login" />;
-  if (role && user.role !== role) return <Navigate to="/" />;
-  return children;
-};
+import ManagePromotions from './pages/ManagePromotions';
+import CalendarView from './pages/CalendarView';
+import Invoice from './pages/Invoice';
+import Login from './pages/Login';
+import ActivityLogs from './pages/ActivityLogs';
+import GuestHistory from './pages/GuestHistory';
+import BookingForm from './pages/BookingForm';
 
 function App() {
   return (
     <HotelProvider>
       <Router>
         <Routes>
-          {/* Customer Application */}
-          <Route element={<CustomerLayout />}>
-            <Route path="/" element={<GuestHome />} />
-            <Route path="/booking" element={<GuestHome />} />
-            <Route path="/my-bookings" element={<ProtectedRoute><MyBookings /></ProtectedRoute>} />
-            <Route path="/promotions" element={<Promotions />} />
-            <Route path="/profile" element={<ProtectedRoute><UserProfile /></ProtectedRoute>} />
-            <Route path="/profile/edit" element={<ProtectedRoute><EditProfile /></ProtectedRoute>} />
-            <Route path="/profile/payment" element={<ProtectedRoute><PaymentMethods /></ProtectedRoute>} />
-            <Route path="/profile/reviews" element={<HotelReviews />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/book/:roomId" element={<BookingForm />} />
-            <Route path="/booking-success" element={<BookingSuccess />} />
-          </Route>
-
           {/* Auth */}
           <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
 
-          {/* Admin Application */}
-          <Route path="/admin" element={<ProtectedRoute role="admin"><AdminLayout /></ProtectedRoute>}>
+          {/* Main Application Layout */}
+          <Route path="/" element={<AdminLayout />}>
             <Route index element={<AdminDashboard />} />
             <Route path="rooms" element={<ManageRooms />} />
+            <Route path="calendar" element={<CalendarView />} />
             <Route path="finances" element={<ManageFinances />} />
             <Route path="reports" element={<DailyReport />} />
-            <Route path="promotions" element={<Promotions />} />
+            <Route path="guests" element={<GuestHistory />} />
+            <Route path="promotions" element={<ManagePromotions />} />
+            <Route path="logs" element={<ActivityLogs />} />
             <Route path="settings" element={<AdminSettings />} />
             <Route path="notifications" element={<AdminNotifications />} />
+            
+            {/* Booking Features */}
+            <Route path="book/:roomId" element={<BookingForm />} />
+            <Route path="booking-success" element={<BookingSuccess />} />
           </Route>
+
+          {/* Standalone Pages (No Layout) */}
+          <Route path="/invoice/:transactionId" element={<Invoice />} />
+
+          {/* Redirect any unknown paths to home */}
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Router>
     </HotelProvider>

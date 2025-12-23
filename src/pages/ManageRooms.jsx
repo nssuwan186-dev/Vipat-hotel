@@ -3,9 +3,10 @@ import { Link } from 'react-router-dom';
 import { useHotel } from '../context/HotelContext';
 
 const ManageRooms = () => {
-  const { rooms, deleteRoom, addRoom } = useHotel();
+  const { rooms, deleteRoom, addRoom, updateRoomStatus } = useHotel(); // Add updateRoomStatus
   const [showAddModal, setShowAddModal] = useState(false);
   const [newRoom, setNewRoom] = useState({ id: '', type: 'Standard', price: 400, status: 'Available' });
+  const [mode, setMode] = useState('management'); // management | housekeeping
 
   const handleAddSubmit = (e) => {
     e.preventDefault();
@@ -20,8 +21,19 @@ const ManageRooms = () => {
     switch (status) {
       case 'Available': return 'bg-green-500/10 text-green-500 border-green-500/20';
       case 'Occupied': return 'bg-primary/10 text-primary border-primary/20';
+      case 'Cleaning': return 'bg-orange-500/10 text-orange-500 border-orange-500/20';
+      case 'Maintenance': return 'bg-red-500/10 text-red-500 border-red-500/20';
       default: return 'bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 border-slate-200 dark:border-slate-700';
     }
+  };
+
+  const cycleStatus = (id, currentStatus) => {
+    const sequence = ['Occupied', 'Cleaning', 'Available', 'Maintenance'];
+    // Simple logic: cleaning -> available is the most common action for housekeeping
+    if (currentStatus === 'Occupied') updateRoomStatus(id, 'Cleaning');
+    else if (currentStatus === 'Cleaning') updateRoomStatus(id, 'Available');
+    else if (currentStatus === 'Available') updateRoomStatus(id, 'Maintenance');
+    else updateRoomStatus(id, 'Available');
   };
 
   return (
@@ -31,11 +43,33 @@ const ManageRooms = () => {
             <h1 className="text-2xl font-black">จัดการห้องพัก</h1>
             <p className="text-[10px] text-slate-500 uppercase tracking-widest">ทั้งหมด {rooms.length} ห้อง</p>
         </div>
-        <button onClick={() => setShowAddModal(true)} className="size-10 rounded-full bg-primary flex items-center justify-center text-white shadow-lg shadow-primary/20"><span className="material-symbols-outlined">add</span></button>
+        <div className="flex gap-2">
+            <button onClick={() => setMode('management')} className={`px-4 py-2 rounded-xl text-sm font-bold transition-all ${mode === 'management' ? 'bg-primary text-white shadow-lg' : 'bg-slate-100 dark:bg-[#1c2a38] text-slate-500'}`}>Admin</button>
+            <button onClick={() => setMode('housekeeping')} className={`px-4 py-2 rounded-xl text-sm font-bold transition-all ${mode === 'housekeeping' ? 'bg-orange-500 text-white shadow-lg' : 'bg-slate-100 dark:bg-[#1c2a38] text-slate-500'}`}>แม่บ้าน</button>
+            {mode === 'management' && (
+                <button onClick={() => setShowAddModal(true)} className="size-10 rounded-full bg-slate-900 dark:bg-white flex items-center justify-center text-white dark:text-slate-900 shadow-lg"><span className="material-symbols-outlined">add</span></button>
+            )}
+        </div>
       </div>
 
-      {/* Mobile Card View (Visible on Small Screens) */}
-      <div className="grid grid-cols-1 gap-3 md:hidden">
+      {mode === 'housekeeping' ? (
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+            {rooms.map(room => (
+                <button 
+                    key={room.id} 
+                    onClick={() => cycleStatus(room.id, room.status)}
+                    className={`p-6 rounded-3xl border-2 flex flex-col items-center justify-center gap-2 aspect-square transition-all active:scale-95 ${getStatusColor(room.status)}`}
+                >
+                    <span className="text-3xl font-black">{room.id}</span>
+                    <span className="text-xs font-bold uppercase px-2 py-1 rounded-full bg-white/50">{room.status}</span>
+                    {room.status === 'Cleaning' && <span className="material-symbols-outlined animate-spin">autorenew</span>}
+                </button>
+            ))}
+        </div>
+      ) : (
+        <>
+        {/* Mobile Card View (Visible on Small Screens) */}
+        <div className="grid grid-cols-1 gap-3 md:hidden">
         {rooms.map(room => (
             <div key={room.id} className="bg-white dark:bg-[#16212b] p-4 rounded-[2rem] border border-slate-200 dark:border-[#223649] flex items-center justify-between">
                 <div className="flex items-center gap-4">
@@ -46,6 +80,11 @@ const ManageRooms = () => {
                     </div>
                 </div>
                 <div className="flex items-center gap-2">
+                    {room.status === 'Available' && (
+                        <Link to={`/admin/book/${room.id}`} className="p-2 text-primary">
+                            <span className="material-symbols-outlined text-[20px]">calendar_add_on</span>
+                        </Link>
+                    )}
                     <span className={`text-[8px] font-black px-2 py-1 rounded-full border ${getStatusColor(room.status)}`}>{room.status === 'Available' ? 'ว่าง' : 'ไม่ว่าง'}</span>
                     <button onClick={() => deleteRoom(room.id)} className="p-2 text-red-500"><span className="material-symbols-outlined text-[20px]">delete</span></button>
                 </div>
@@ -72,12 +111,19 @@ const ManageRooms = () => {
                         <td className="p-4">{room.type}</td>
                         <td className="p-4"><span className={`px-3 py-1 rounded-full text-[10px] font-bold border ${getStatusColor(room.status)}`}>{room.status}</span></td>
                         <td className="p-4 font-black">฿{room.price}</td>
-                        <td className="p-4 text-right"><button onClick={() => deleteRoom(room.id)} className="text-red-500"><span className="material-symbols-outlined">delete</span></button></td>
+                        <td className="p-4 text-right flex justify-end gap-2">
+                            {room.status === 'Available' && (
+                                <Link to={`/admin/book/${room.id}`} className="text-primary hover:bg-primary/10 p-1 rounded-full"><span className="material-symbols-outlined">calendar_add_on</span></Link>
+                            )}
+                            <button onClick={() => deleteRoom(room.id)} className="text-red-500 hover:bg-red-500/10 p-1 rounded-full"><span className="material-symbols-outlined">delete</span></button>
+                        </td>
                     </tr>
                 ))}
             </tbody>
         </table>
       </div>
+      </>
+      )}
 
       {/* Add Modal */}
       {showAddModal && (

@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useHotel } from '../context/HotelContext';
 
 const AdminDashboard = () => {
-  const { rooms, stats, transactions, logout, updateRoomStatus } = useHotel();
+  const { rooms, stats, transactions, updateRoomStatus } = useHotel();
   const navigate = useNavigate();
 
   // คำนวณสรุปการเงินจริงจาก Transactions
