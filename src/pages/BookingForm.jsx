@@ -60,7 +60,7 @@ const BookingForm = () => {
         {/* Breadcrumb */}
         <div className="flex flex-col gap-2 mb-8">
           <div className="flex items-center gap-2 text-slate-500 dark:text-text-secondary text-sm mb-2">
-            <span className="cursor-pointer hover:text-primary" onClick={() => navigate('/admin/rooms')}>จัดการห้องพัก</span>
+            <span className="cursor-pointer hover:text-primary" onClick={() => navigate('/rooms')}>จัดการห้องพัก</span>
             <span className="material-symbols-outlined text-[16px]">chevron_right</span>
             <span className="text-slate-900 dark:text-white font-medium">ข้อมูลผู้เข้าพัก</span>
           </div>
