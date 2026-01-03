@@ -16,10 +16,10 @@ const BookingSuccess = () => {
           ขอบคุณที่เลือกพักกับโรงแรมวิพัฒน์กาลจักร การจองของคุณเสร็จสมบูรณ์แล้ว เราตื่นเต้นที่จะได้ต้อนรับคุณเร็วๆ นี้
         </p>
         <div className="flex gap-4">
-            <Link to="/" className="px-6 py-3 rounded-xl bg-surface-dark border border-border-dark text-white font-bold hover:bg-gray-800 transition-colors">
+            <Link to="/" className="px-6 py-3 rounded-xl bg-white dark:bg-surface-dark border border-slate-200 dark:border-border-dark text-slate-900 dark:text-white font-bold hover:bg-slate-50 dark:hover:bg-gray-800 transition-colors">
                 กลับหน้าหลัก
             </Link>
-            <Link to="/my-bookings" className="px-6 py-3 rounded-xl bg-primary text-white font-bold hover:bg-blue-600 transition-colors">
+            <Link to="/my-bookings" className="px-6 py-3 rounded-xl bg-primary text-slate-900 dark:text-white font-bold hover:bg-blue-600 transition-colors">
                 ดูประวัติการจอง
             </Link>
         </div>

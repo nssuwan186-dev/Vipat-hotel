@@ -54,26 +54,26 @@ const ManageFinances = () => {
   };
 
   return (
-    <div className="p-6 md:p-10 max-w-[800px] mx-auto flex flex-col gap-8 text-white">
+    <div className="p-6 md:p-10 max-w-[800px] mx-auto flex flex-col gap-8 text-slate-900 dark:text-white">
       <div>
         <h1 className="text-3xl font-black">จัดการรายรับ-รายจ่าย</h1>
-        <p className="text-[#90adcb]">บันทึกรายการประจำวันและจัดการค่ามัดจำ</p>
+        <p className="text-slate-500 dark:text-[#90adcb]">บันทึกรายการประจำวันและจัดการค่ามัดจำ</p>
       </div>
 
-      <form onSubmit={handleSubmit} className="bg-[#16212b] p-8 rounded-3xl border border-[#223649] flex flex-col gap-6 shadow-2xl">
-        <div className="flex gap-4 p-1 bg-[#1c2a38] rounded-2xl">
+      <form onSubmit={handleSubmit} className="bg-white dark:bg-[#16212b] p-8 rounded-3xl border border-slate-200 dark:border-[#223649] flex flex-col gap-6 shadow-2xl">
+        <div className="flex gap-4 p-1 bg-slate-100 dark:bg-[#1c2a38] rounded-2xl">
             <button type="button" onClick={() => setFormData({...formData, type: 'income'})} className={`flex-1 py-3 rounded-xl font-bold transition-all ${formData.type === 'income' ? 'bg-green-500 text-white shadow-lg' : 'text-slate-500'}`}>รายรับ</button>
             <button type="button" onClick={() => setFormData({...formData, type: 'expense'})} className={`flex-1 py-3 rounded-xl font-bold transition-all ${formData.type === 'expense' ? 'bg-red-500 text-white shadow-lg' : 'text-slate-500'}`}>รายจ่าย</button>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <label className="flex flex-col gap-2">
-                <span className="text-sm font-bold text-slate-400">วันที่</span>
-                <input type="date" className="bg-[#1c2a38] border-none rounded-xl h-12 px-4 focus:ring-2 focus:ring-primary" value={formData.date} onChange={e => setFormData({...formData, date: e.target.value})} />
+                <span className="text-sm font-bold text-slate-500 dark:text-slate-400">วันที่</span>
+                <input type="date" className="bg-slate-50 dark:bg-[#1c2a38] border-slate-200 dark:border-transparent rounded-xl h-12 px-4 focus:ring-2 focus:ring-primary" value={formData.date} onChange={e => setFormData({...formData, date: e.target.value})} />
             </label>
             <label className="flex flex-col gap-2">
-                <span className="text-sm font-bold text-slate-400">วิธีการชำระ</span>
-                <select className="bg-[#1c2a38] border-none rounded-xl h-12 px-4 focus:ring-2 focus:ring-primary" value={formData.method} onChange={e => setFormData({...formData, method: e.target.value})}>
+                <span className="text-sm font-bold text-slate-500 dark:text-slate-400">วิธีการชำระ</span>
+                <select className="bg-slate-50 dark:bg-[#1c2a38] border-slate-200 dark:border-transparent rounded-xl h-12 px-4 focus:ring-2 focus:ring-primary" value={formData.method} onChange={e => setFormData({...formData, method: e.target.value})}>
                     <option value="cash">เงินสด</option>
                     <option value="transfer">โอนเงิน</option>
                 </select>
@@ -82,28 +82,28 @@ const ManageFinances = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <label className="flex flex-col gap-2">
-                <span className="text-sm font-bold text-slate-400">หมายเลขห้อง / ชื่อรายการ</span>
-                <input required type="text" className="bg-[#1c2a38] border-none rounded-xl h-12 px-4 focus:ring-2 focus:ring-primary" value={formData.roomNo} onChange={e => setFormData({...formData, roomNo: e.target.value})} placeholder="เช่น A101" />
+                <span className="text-sm font-bold text-slate-500 dark:text-slate-400">หมายเลขห้อง / ชื่อรายการ</span>
+                <input required type="text" className="bg-slate-50 dark:bg-[#1c2a38] border-slate-200 dark:border-transparent rounded-xl h-12 px-4 focus:ring-2 focus:ring-primary" value={formData.roomNo} onChange={e => setFormData({...formData, roomNo: e.target.value})} placeholder="เช่น A101" />
             </label>
             <label className="flex flex-col gap-2">
-                <span className="text-sm font-bold text-slate-400">จำนวนเงินทั้งหมด (฿)</span>
-                <input required type="number" className="bg-[#1c2a38] border-none rounded-xl h-12 px-4 focus:ring-2 focus:ring-primary" value={formData.amount} onChange={e => setFormData({...formData, amount: e.target.value})} placeholder="0.00" />
+                <span className="text-sm font-bold text-slate-500 dark:text-slate-400">จำนวนเงินทั้งหมด (฿)</span>
+                <input required type="number" className="bg-slate-50 dark:bg-[#1c2a38] border-slate-200 dark:border-transparent rounded-xl h-12 px-4 focus:ring-2 focus:ring-primary" value={formData.amount} onChange={e => setFormData({...formData, amount: e.target.value})} placeholder="0.00" />
             </label>
         </div>
 
         {formData.type === 'income' && (
             <label className="flex flex-col gap-2">
-                <span className="text-sm font-bold text-slate-400">มัดจำ (ที่รวมอยู่ในยอดด้านบน)</span>
-                <input type="number" className="bg-[#1c2a38] border-none rounded-xl h-12 px-4 focus:ring-2 focus:ring-primary" value={formData.deposit} onChange={e => setFormData({...formData, deposit: e.target.value})} placeholder="หักมัดจำคืนเมื่อเช็คเอาท์" />
+                <span className="text-sm font-bold text-slate-500 dark:text-slate-400">มัดจำ (ที่รวมอยู่ในยอดด้านบน)</span>
+                <input type="number" className="bg-slate-50 dark:bg-[#1c2a38] border-slate-200 dark:border-transparent rounded-xl h-12 px-4 focus:ring-2 focus:ring-primary" value={formData.deposit} onChange={e => setFormData({...formData, deposit: e.target.value})} placeholder="หักมัดจำคืนเมื่อเช็คเอาท์" />
             </label>
         )}
 
         <label className="flex flex-col gap-2">
-            <span className="text-sm font-bold text-slate-400">หมายเหตุ</span>
-            <textarea className="bg-[#1c2a38] border-none rounded-xl p-4 h-24 resize-none focus:ring-2 focus:ring-primary" value={formData.note} onChange={e => setFormData({...formData, note: e.target.value})} placeholder="ระบุข้อมูลเพิ่มเติม..."></textarea>
+            <span className="text-sm font-bold text-slate-500 dark:text-slate-400">หมายเหตุ</span>
+            <textarea className="bg-slate-50 dark:bg-[#1c2a38] border-slate-200 dark:border-transparent rounded-xl p-4 h-24 resize-none focus:ring-2 focus:ring-primary" value={formData.note} onChange={e => setFormData({...formData, note: e.target.value})} placeholder="ระบุข้อมูลเพิ่มเติม..."></textarea>
         </label>
 
-        <button type="submit" className="w-full py-4 mt-2 bg-primary text-white font-black text-lg rounded-2xl shadow-xl shadow-primary/20 hover:bg-blue-600 transition-all active:scale-[0.98]">
+        <button type="submit" className="w-full py-4 mt-2 bg-primary text-slate-900 dark:text-white font-black text-lg rounded-2xl shadow-xl shadow-primary/20 hover:bg-blue-600 transition-all active:scale-[0.98]">
             บันทึกรายการ
         </button>
       </form>

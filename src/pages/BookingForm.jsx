@@ -20,7 +20,7 @@ const BookingForm = () => {
   });
 
   if (!room) {
-    return <div className="text-center py-20 text-white">Room not found</div>;
+    return <div className="text-center py-20 text-slate-900 dark:text-white">Room not found</div>;
   }
 
   const handleChange = (e) => {
@@ -42,13 +42,13 @@ const BookingForm = () => {
       <main className="flex-1 py-8 px-4 md:px-8 max-w-7xl mx-auto w-full">
         {/* Breadcrumb */}
         <div className="flex flex-col gap-2 mb-8">
-          <div className="flex items-center gap-2 text-text-secondary text-sm mb-2">
+          <div className="flex items-center gap-2 text-slate-500 dark:text-text-secondary text-sm mb-2">
             <span className="cursor-pointer hover:text-primary" onClick={() => navigate('/')}>หน้าแรก</span>
             <span className="material-symbols-outlined text-[16px]">chevron_right</span>
             <span className="text-slate-900 dark:text-white font-medium">ข้อมูลผู้เข้าพัก</span>
           </div>
           <h1 className="text-slate-900 dark:text-white text-3xl font-bold leading-tight">แบบฟอร์มข้อมูลผู้เข้าพัก</h1>
-          <p className="text-text-secondary text-base">กรุณากรอกข้อมูลส่วนตัวและข้อมูลการชำระเงินสำหรับการจองห้อง {room.id} ({room.type})</p>
+          <p className="text-slate-500 dark:text-text-secondary text-base">กรุณากรอกข้อมูลส่วนตัวและข้อมูลการชำระเงินสำหรับการจองห้อง {room.id} ({room.type})</p>
         </div>
 
         <form onSubmit={handleSubmit} className="flex flex-col lg:flex-row gap-8">
@@ -148,7 +148,7 @@ const BookingForm = () => {
                   <span className="text-slate-900 dark:text-white font-bold">ราคารวม</span>
                   <span className="text-primary text-xl font-black">฿{room.price.toLocaleString()}</span>
                 </div>
-                <button type="submit" className="w-full py-3 mt-4 rounded-xl bg-primary text-white font-bold hover:bg-blue-600 shadow-lg shadow-blue-500/30 transition-all">
+                <button type="submit" className="w-full py-3 mt-4 rounded-xl bg-primary text-slate-900 dark:text-white font-bold hover:bg-blue-600 shadow-lg shadow-blue-500/30 transition-all">
                   ยืนยันการจอง
                 </button>
               </div>

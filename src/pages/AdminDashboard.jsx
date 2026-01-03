@@ -33,24 +33,24 @@ const AdminDashboard = () => {
       
       {/* Overview Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div className="bg-[#16212b] p-6 rounded-3xl border border-[#223649] flex flex-col gap-2 shadow-sm">
+        <div className="bg-white dark:bg-[#16212b] p-6 rounded-3xl border border-slate-200 dark:border-[#223649] flex flex-col gap-2 shadow-sm">
             <p className="text-xs font-bold text-slate-500 uppercase tracking-widest">สถานะห้องพัก</p>
             <div className="flex items-end justify-between">
-                <h3 className="text-3xl font-black">{rooms.filter(r => r.status === 'Available').length}</h3>
+                <h3 className="text-3xl font-black text-slate-900 dark:text-white">{rooms.filter(r => r.status === 'Available').length}</h3>
                 <span className="text-green-500 text-xs font-bold">ห้องว่าง</span>
             </div>
-            <div className="w-full bg-[#1c2a38] h-1.5 rounded-full mt-2 overflow-hidden">
+            <div className="w-full bg-slate-100 dark:bg-[#1c2a38] h-1.5 rounded-full mt-2 overflow-hidden">
                 <div className="bg-green-500 h-full" style={{ width: `${(rooms.filter(r => r.status === 'Available').length / rooms.length) * 100}%` }}></div>
             </div>
         </div>
 
-        <div className="bg-[#16212b] p-6 rounded-3xl border border-[#223649] flex flex-col gap-2 shadow-sm text-green-400">
+        <div className="bg-white dark:bg-[#16212b] p-6 rounded-3xl border border-slate-200 dark:border-[#223649] flex flex-col gap-2 shadow-sm text-green-400">
             <p className="text-xs font-bold text-slate-500 uppercase tracking-widest">รายรับวันนี้</p>
             <h3 className="text-3xl font-black">฿{totalIncome.toLocaleString()}</h3>
             <p className="text-[10px] opacity-70">ยอดโอน/เงินสดรวม</p>
         </div>
 
-        <div className="bg-[#16212b] p-6 rounded-3xl border border-[#223649] flex flex-col gap-2 shadow-sm text-red-400">
+        <div className="bg-white dark:bg-[#16212b] p-6 rounded-3xl border border-slate-200 dark:border-[#223649] flex flex-col gap-2 shadow-sm text-red-400">
             <p className="text-xs font-bold text-slate-500 uppercase tracking-widest">รายจ่ายรวม</p>
             <h3 className="text-3xl font-black">฿{totalExpense.toLocaleString()}</h3>
             <p className="text-[10px] opacity-70">ค่าน้ำไฟ/อุปกรณ์</p>
@@ -66,7 +66,7 @@ const AdminDashboard = () => {
       {/* Room Grid */}
       <div className="flex flex-col gap-6">
         <div className="flex justify-between items-center px-2">
-            <h2 className="text-xl font-bold">ผังห้องพัก (Real-time)</h2>
+            <h2 className="text-xl font-bold text-slate-900 dark:text-white">ผังห้องพัก (Real-time)</h2>
             <div className="flex gap-2">
                 {['Available', 'Occupied', 'Cleaning', 'Maintenance'].map(s => (
                     <div key={s} className="flex items-center gap-1.5 text-[10px] font-bold text-slate-500 uppercase">
@@ -91,25 +91,25 @@ const AdminDashboard = () => {
       </div>
 
       {/* Recent Activity */}
-      <div className="bg-[#16212b] rounded-3xl border border-[#223649] overflow-hidden shadow-xl">
-        <div className="p-6 border-b border-[#223649] flex justify-between items-center">
-            <h3 className="font-bold">รายการเงินล่าสุด</h3>
+      <div className="bg-white dark:bg-[#16212b] rounded-3xl border border-slate-200 dark:border-[#223649] overflow-hidden shadow-xl">
+        <div className="p-6 border-b border-slate-200 dark:border-[#223649] flex justify-between items-center">
+            <h3 className="font-bold text-slate-900 dark:text-white">รายการเงินล่าสุด</h3>
             <Link to="/admin/finances" className="text-xs text-primary font-bold hover:underline">ดูทั้งหมด</Link>
         </div>
         <div className="overflow-x-auto">
             <table className="w-full text-left text-sm">
                 <thead>
-                    <tr className="bg-[#1c2a38] text-slate-400">
+                    <tr className="bg-slate-50 dark:bg-[#1c2a38] text-slate-500 dark:text-slate-400">
                         <th className="px-6 py-3 font-bold">รายการ</th>
                         <th className="px-6 py-3 font-bold">วันที่</th>
                         <th className="px-6 py-3 font-bold text-right">จำนวนเงิน</th>
                     </tr>
                 </thead>
-                <tbody className="divide-y divide-[#223649]">
+                <tbody className="divide-y divide-slate-200 dark:divide-[#223649]">
                     {transactions.slice(0, 5).map((t, i) => (
-                        <tr key={i} className="hover:bg-white/5 transition-colors">
-                            <td className="px-6 py-4 font-medium text-white">{t.desc}</td>
-                            <td className="px-6 py-4 text-slate-400">{t.date}</td>
+                        <tr key={i} className="hover:bg-slate-50 dark:hover:bg-white/5 transition-colors">
+                            <td className="px-6 py-4 font-medium text-slate-900 dark:text-white">{t.desc}</td>
+                            <td className="px-6 py-4 text-slate-500 dark:text-slate-400">{t.date}</td>
                             <td className={`px-6 py-4 text-right font-black ${t.amount >= 0 ? 'text-green-400' : 'text-red-400'}`}>
                                 ฿{Math.abs(t.amount).toLocaleString()}
                             </td>
