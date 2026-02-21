@@ -11,6 +11,7 @@ const AdminLayout = () => {
   const allMenuItems = [
     { label: 'แดชบอร์ด', icon: 'analytics', path: '/admin', allowedRoles: ['admin', 'monitor'] },
     { label: 'จัดการห้องพัก', icon: 'bed', path: '/admin/rooms', allowedRoles: ['admin', 'monitor'] },
+    { label: 'ประวัติการจอง', icon: 'history', path: '/admin/bookings', allowedRoles: ['admin', 'monitor'] },
     { label: 'จัดการการเงิน', icon: 'payments', path: '/admin/finances', allowedRoles: ['admin'] },
     { label: 'รายงานรายวัน', icon: 'description', path: '/admin/reports', allowedRoles: ['admin', 'monitor'] },
     { label: 'โปรโมชั่น', icon: 'campaign', path: '/admin/promotions', allowedRoles: ['admin', 'monitor'] },

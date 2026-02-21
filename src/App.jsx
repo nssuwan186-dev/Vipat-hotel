@@ -27,6 +27,7 @@ import ManageFinances from './pages/ManageFinances';
 import DailyReport from './pages/DailyReport';
 import AdminSettings from './pages/AdminSettings';
 import AdminNotifications from './pages/AdminNotifications';
+import BookingHistory from './pages/BookingHistory';
 
 const ProtectedRoute = ({ children, role, allowedRoles }) => {
   const { user } = useHotel();
@@ -71,6 +72,7 @@ function App() {
             <Route path="rooms" element={<ManageRooms />} />
             <Route path="finances" element={<ProtectedRoute role="admin"><ManageFinances /></ProtectedRoute>} />
             <Route path="reports" element={<DailyReport />} />
+            <Route path="bookings" element={<BookingHistory />} />
             <Route path="promotions" element={<Promotions />} />
             <Route path="settings" element={<ProtectedRoute role="admin"><AdminSettings /></ProtectedRoute>} />
             <Route path="notifications" element={<AdminNotifications />} />

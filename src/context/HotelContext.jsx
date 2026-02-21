@@ -1,4 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import kaggleBookings from '../../data/kaggle-bookings.json';
+import kaggleTransactions from '../../data/kaggle-transactions.json';
 
 const HotelContext = createContext();
 export const useHotel = () => useContext(HotelContext);
@@ -58,9 +60,24 @@ export const HotelProvider = ({ children }) => {
     { id: 'N7', type: 'Standard', price: 500, status: 'Available', floor: 3 },
   ];
 
+  // Load Kaggle data on first run
+  const loadKaggleData = () => {
+    const hasLoadedKaggle = localStorage.getItem('vipat_kaggle_loaded');
+    if (!hasLoadedKaggle) {
+      localStorage.setItem('vipat_trx_v4', JSON.stringify(kaggleTransactions));
+      localStorage.setItem('vipat_bookings_v4', JSON.stringify(kaggleBookings));
+      localStorage.setItem('vipat_kaggle_loaded', 'true');
+      console.log('✅ Loaded Kaggle data into localStorage');
+    }
+  };
+
   // Persistent States
   const [rooms, setRooms] = useState(() => JSON.parse(localStorage.getItem('vipat_rooms_v3')) || DEFAULT_ROOMS);
-  const [transactions, setTransactions] = useState(() => JSON.parse(localStorage.getItem('vipat_trx_v3')) || []);
+  const [transactions, setTransactions] = useState(() => {
+    loadKaggleData();
+    return JSON.parse(localStorage.getItem('vipat_trx_v4')) || kaggleTransactions;
+  });
+  const [bookings, setBookings] = useState(() => JSON.parse(localStorage.getItem('vipat_bookings_v4')) || kaggleBookings);
   const [user, setUser] = useState(() => JSON.parse(localStorage.getItem('vipat_user_v3')) || null);
   const [notifications, setNotifications] = useState(() => JSON.parse(localStorage.getItem('vipat_notifs_v3')) || [
     { id: 1, title: 'จองใหม่', message: 'มีการจองใหม่ห้อง A101', time: '10 นาทีที่แล้ว', read: false },
@@ -72,11 +89,12 @@ export const HotelProvider = ({ children }) => {
 
   useEffect(() => {
     localStorage.setItem('vipat_rooms_v3', JSON.stringify(rooms));
-    localStorage.setItem('vipat_trx_v3', JSON.stringify(transactions));
+    localStorage.setItem('vipat_trx_v4', JSON.stringify(transactions));
+    localStorage.setItem('vipat_bookings_v4', JSON.stringify(bookings));
     localStorage.setItem('vipat_user_v3', JSON.stringify(user));
     localStorage.setItem('vipat_notifs_v3', JSON.stringify(notifications));
     localStorage.setItem('vipat_promos_v3', JSON.stringify(promotions));
-  }, [rooms, transactions, user, notifications, promotions]);
+  }, [rooms, transactions, bookings, user, notifications, promotions]);
 
   // Actions
   const login = (u) => setUser(u);
@@ -88,14 +106,35 @@ export const HotelProvider = ({ children }) => {
   const bookRoom = (id, guestInfo) => {
     updateRoomStatus(id, 'Occupied');
     const room = rooms.find(r => r.id === id);
+    const newBooking = {
+      id: `BK${Date.now()}`,
+      roomId: id,
+      guestName: `${guestInfo.firstName} ${guestInfo.lastName}`,
+      email: guestInfo.email,
+      phone: guestInfo.phone,
+      checkIn: guestInfo.checkIn,
+      checkOut: guestInfo.checkOut,
+      nights: guestInfo.nights || 1,
+      adults: guestInfo.adults || 2,
+      children: guestInfo.children || 0,
+      totalPrice: room.price * (guestInfo.nights || 1),
+      status: 'Confirmed',
+      country: 'THA',
+      marketSegment: 'Direct'
+    };
+    
+    setBookings(prev => [newBooking, ...prev]);
+    
     addTransaction({
         id: `TRX-${Date.now()}`,
         desc: `จองห้อง ${id} (${guestInfo.firstName})`,
         amount: room.price,
         type: 'income',
         date: new Date().toLocaleDateString('th-TH'),
-        status: 'Completed'
+        status: 'Completed',
+        bookingId: newBooking.id
     });
+    
     setNotifications(prev => [{
         id: Date.now(),
         title: 'การจองใหม่',
@@ -107,9 +146,9 @@ export const HotelProvider = ({ children }) => {
 
   return (
     <HotelContext.Provider value={{ 
-        rooms, transactions, user, notifications, promotions,
+        rooms, transactions, bookings, user, notifications, promotions,
         login, logout, addTransaction, updateRoomStatus, bookRoom,
-        setRooms, setPromotions, setNotifications
+        setRooms, setBookings, setPromotions, setNotifications
     }}>
       {children}
     </HotelContext.Provider>

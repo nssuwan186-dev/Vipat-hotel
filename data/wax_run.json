@@ -1,0 +1,14 @@
+[
+  {
+    "owner": "valid",
+    "nssuwan186@gmail.com": "#NAME?"
+  },
+  {
+    "owner": "docs",
+    "nssuwan186@gmail.com": "https://waxdotrun.notion.site/Configuration-wax-run-Sheet-07641fda08804f6181252bd267ddc6af"
+  },
+  {
+    "owner": "{\n\"uuid\": \"369846f474e74706b29e2eedb8812d0d\",\n\"spreadsheetId\": \"1Tes9bQ7qyq5v4MPidprzxaXL8OuF7A6QlvK8GLAjzuY\",\n\"integrationId\": null,\n\"actions\": {\n\"report1-run\": {\n\"type\": \"sql\",\n\"button\": \"run\",\n\"sheetName\": \"report1\",\n\"codeCell\": \"B1\",\n\"destination\": \"A6\"\n}\n},\n\"buttons\": {},\n\"schedule\": {},\n\"ok\": true\n}",
+    "nssuwan186@gmail.com": ""
+  }
+]
